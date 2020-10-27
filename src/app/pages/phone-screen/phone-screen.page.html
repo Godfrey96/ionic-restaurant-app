@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>phone-screen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content">
+
+    <!-- Phone Number Content -->
+    <div class="cont-1">
+      <img style="width: 12%; height: 35px;" src="../../../assets/images/ZA.png" alt="" />
+      <ion-input style="margin-bottom: 10px; margin-left: 5px;" type="number" placeholder="Enter your phone number">{{code}}</ion-input>
+    </div>
+    
+    <div class="cont-2">
+      <p style="font-size: small;">An OTP will be sent to given phone number</p>
+    </div>
+
+    <div class="signup">
+      <ion-button class="btnsignup" fill="clear">Send OTP</ion-button>
+    </div>
+  </div>
+
+  <!--OTP Content -->
+  <div>
+
+    <div class="cont-4">
+      <p style="font-size: small;"> An OTP sent to +27720461090 </p>
+    </div>
+    
+    <div class="cont-5">
+      <ion-input style="margin-bottom: 10px; margin-left: 5px;" type="number" placeholder="Enter the 6-Digit OTP sent to you"></ion-input>
+    </div>
+
+    <div class="signup">
+      <ion-button class="btnsignup" fill="clear">Verify OTP</ion-button>
+    </div>
+    
+  </div>
+
+</ion-content>
