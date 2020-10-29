@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="welcome"></ion-back-button>
     </ion-buttons>
-    <ion-title>Sign up</ion-title>
+    <ion-title>Complete Sign up</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,25 +11,39 @@
 
   <div class="content">
 
-    <div class="cont-1">
-      <ion-input style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
-      <ion-input style="margin-bottom: 10px;" type="text" placeholder="Last name"></ion-input>
-      <ion-input style="margin-bottom: 10px;" type="email" placeholder="Email"></ion-input>
-      <ion-input style="margin-bottom: 10px;" type="number" placeholder="Mobile"></ion-input>
-      <ion-input style="margin-bottom: 10px;" type="password" placeholder="Password"></ion-input>
+    <div class="cont-2">
+      <p style="font-size: small; margin-bottom: 30px;"><b>Complete your registration by filling up the form</b></p>
     </div>
 
-    <div class="cont-2">
-      <p style="font-size: small; margin-top: 0px;">Already have an account?<a routerLink="/signin"><b> Sign in</b></a></p>
+    <div class="cont-1">
+      <ion-input id="firstName" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
+      <!-- <ion-input style="margin-bottom: 10px;" type="text" placeholder="Last name"></ion-input>
+      <ion-input style="margin-bottom: 10px;" type="email" placeholder="Email"></ion-input> -->
+      <!-- <ion-input style="margin-bottom: 10px;" type="number" placeholder="Mobile"></ion-input> -->
+      <!-- <ion-input style="margin-bottom: 10px;" type="password" placeholder="Password"></ion-input> -->
     </div>
+
+    <!-- <div class="cont-2">
+      <p style="font-size: small; margin-top: 0px;">Already have an account?<a routerLink="/signin"><b> Sign in</b></a></p>
+    </div>-->
+
+    <!-- <div class="cont-2">
+      <p style="font-size: small; margin-top: 0px;">Complete your registration by filling up the form</p>
+    </div> -->
 
     <div class="signup">
-      <ion-button class="btnsignup" fill="clear">Sign up</ion-button>
+      <ion-button class="btnsignup" fill="clear" (click)="completeSignup()" *ngIf="!spin">
+        Complete Signup
+      </ion-button>
     </div>
 
-    <div class="cont-3">
-      <p style="font-size: small; margin-top: 20px; text-align: center;">By signing up you agree to our terms and conditions of use and Privacy Policy</p>
+    <div class="ion-text-center" *ngIf="spin">
+      <ion-spinner color="primary"></ion-spinner>
     </div>
+
+    <!-- <div class="cont-3">
+      <p style="font-size: small; margin-top: 20px; text-align: center;">By signing up you agree to our terms and conditions of use and Privacy Policy</p>
+    </div> -->
 
   </div>
 

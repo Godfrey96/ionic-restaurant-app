@@ -21,9 +21,9 @@
     <h3>Nearby</h3>
     <ion-row>
 
-      <ion-col size="4">
+      <ion-col size="4" *ngFor="let rest of restaurants">
         <ion-card>
-          <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burger-king-1575370751.jpg" />
+          <img style="width: 150px; height: 80px;" src="{{rest.imgUrl}}" />
           <!-- <ion-card-header>
             <ion-card-title>
               <p style="font-size: 10px;">ABC - Soweto</p>
@@ -39,66 +39,13 @@
             <ion-card-title>Madison, WI</ion-card-title>
           </ion-card-header> -->
         </ion-card>
-        <p style="font-size: 10px;">ABC - Soweto</p>
-        <p style="font-size: 10px;">Breakfast</p>
+        <p style="font-size: 10px;">{{rest.name}} - {{rest.location}}</p>
+        <p style="font-size: 10px;">{{rest.menu}}</p>
         <div class="reviews">
-          <p style="font-size: 10px;">4.7</p>
-          <p style="font-size: 10px;">(225) reviews</p>
+          <p style="font-size: 10px;">{{rest.rating}} <ion-icon style="color: goldenrod;" name="star"></ion-icon></p>
+          <p style="font-size: 10px;">({{rest.reviews}} reviews)</p>
         </div>
       </ion-col>
-
-      <ion-col size="4">
-        <ion-card>
-          <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burger-king-1575370751.jpg" />
-          <!-- <ion-card-header>
-            <ion-card-title>
-              <p style="font-size: 10px;">ABC - Soweto</p>
-            </ion-card-title>
-            <ion-card-subtitle>
-              <p style="font-size: 10px;">Breakfast</p>
-            </ion-card-subtitle>
-            <div class="reviews">
-              <p style="font-size: 10px;">4.7</p>
-              <p style="font-size: 10px;">(225) reviews</p>
-            </div>
-            <ion-card-subtitle>Destination</ion-card-subtitle>
-            <ion-card-title>Madison, WI</ion-card-title>
-          </ion-card-header> -->
-        </ion-card>
-        <p style="font-size: 10px;">ABC - Soweto</p>
-        <p style="font-size: 10px;">Breakfast</p>
-        <div class="reviews">
-          <p style="font-size: 10px;">4.7</p>
-          <p style="font-size: 10px;">(225) reviews</p>
-        </div>
-      </ion-col>
-
-      <ion-col size="4">
-        <ion-card>
-          <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burger-king-1575370751.jpg" />
-          <!-- <ion-card-header>
-            <ion-card-title>
-              <p style="font-size: 10px;">ABC - Soweto</p>
-            </ion-card-title>
-            <ion-card-subtitle>
-              <p style="font-size: 10px;">Breakfast</p>
-            </ion-card-subtitle>
-            <div class="reviews">
-              <p style="font-size: 10px;">4.7</p>
-              <p style="font-size: 10px;">(225) reviews</p>
-            </div>
-            <ion-card-subtitle>Destination</ion-card-subtitle>
-            <ion-card-title>Madison, WI</ion-card-title>
-          </ion-card-header> -->
-        </ion-card>
-        <p style="font-size: 10px;">ABC - Soweto</p>
-        <p style="font-size: 10px;">Breakfast</p>
-        <div class="reviews">
-          <p style="font-size: 10px;">4.7</p>
-          <p style="font-size: 10px;">(225) reviews</p>
-        </div>
-      </ion-col>
-
     </ion-row>
   </div>
 

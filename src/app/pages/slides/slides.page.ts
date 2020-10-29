@@ -192,7 +192,7 @@ export class SlidesPage implements OnInit {
     this.selectedSlide.getActiveIndex().then((slidesIndex) => {
       if(slidesIndex == 2){
         //console.log("Done Slider");
-        this.router.navigateByUrl('/welcome')
+        this.router.navigateByUrl('/phone-screen')
       }else{
         this.selectedSlide.slideNext();
       }

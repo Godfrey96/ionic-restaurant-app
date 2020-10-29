@@ -45,6 +45,8 @@ ion-input{
 
 
 .btnsignup{
+    display: flex;
+    flex-direction: column;
     --background: #50A581;
     border-radius: 6px;
     color: #ffffff;
