@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'landing-page',
     loadChildren: () => import('./pages/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
   },
+  {
+    path: 'view-restaurant/:id',
+    loadChildren: () => import('./pages/view-restaurant/view-restaurant.module').then( m => m.ViewRestaurantPageModule)
+  },
 ];
 
 @NgModule({

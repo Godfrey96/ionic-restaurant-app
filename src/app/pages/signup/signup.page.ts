@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmailValidator } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 

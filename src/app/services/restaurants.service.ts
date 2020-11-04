@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
-require('firebase/firestore');
+import 'firebase/firestore'
+// require('firebase/firestore');
 
 import { Restaurant } from '../model/restaurant';
 
@@ -8,7 +9,9 @@ import { Restaurant } from '../model/restaurant';
   providedIn: 'root'
 })
 export class RestaurantsService {
-  restaurants = [];
+
+  //restaurants: Array<any> = [];
+  restaurants: any;
 
   // private restaurants: Restaurant[] = [
   //   {
@@ -39,12 +42,32 @@ export class RestaurantsService {
 
   constructor() { }
 
-  getAllRestaurants(){
+  // getAllRestaurants(restaurant){
     // firebase.firestore().collection('restaurants').onSnapshot(res => {
     //   res.forEach(element => {
     //     this.restaurants.push(element.data());
     //   })
     // })
     // return [...this.restaurants]
+  //   const query = firebase.firestore().collection('restaurants');
+  //   this.getDocumentsInQuery(query, restaurant)
+  // }
+
+  // getDocumentsInQuery(query, restaurant){
+  //   query.onSnapshot(function(snapshot){
+  //     if(!snapshot.size) return restaurant.empty();
+  //     snapshot.docChanges().forEach(function(change){
+  //       if(change.type === 'removed'){
+  //         restaurant.remove(change.doc);
+  //       }else{
+  //         restaurant.display(change.doc);
+  //       }
+  //     });
+  //   });
+  // }
+
+
+  getRestaurantById(id){
+    return firebase.firestore().collection('restaurants').doc(id).get()
   }
 }

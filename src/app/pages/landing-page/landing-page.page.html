@@ -22,9 +22,18 @@
     <ion-row>
 
       <ion-col size="4" *ngFor="let rest of restaurants">
+        <img style="width: 150px; height: 100px; margin-left: 10px;" src="{{rest.imgUrl}}" [routerLink]="'/view-restaurant/'+ rest?.ownerId" />
+        <div class="head">
+          <p style="font-size: 10px; margin-left: 10px;">{{rest.resName}} - {{rest.address}}</p>
+        <p style="font-size: 10px; margin-left: 10px;">{{rest.category}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+      <!-- <ion-col size="4" *ngFor="let rest of restaurants">
         <ion-card>
-          <img style="width: 150px; height: 80px;" src="{{rest.imgUrl}}" />
-          <!-- <ion-card-header>
+          <img style="width: 150px; height: 80px;" src="{{rest.imgUrl}}" [routerLink]="'/view-restaurant/'+rest.uid" />
+          <ion-card-header>
             <ion-card-title>
               <p style="font-size: 10px;">ABC - Soweto</p>
             </ion-card-title>
@@ -38,18 +47,18 @@
             <ion-card-subtitle>Destination</ion-card-subtitle>
             <ion-card-title>Madison, WI</ion-card-title>
           </ion-card-header> -->
-        </ion-card>
-        <p style="font-size: 10px;">{{rest.name}} - {{rest.location}}</p>
-        <p style="font-size: 10px;">{{rest.menu}}</p>
-        <div class="reviews">
+        <!-- </ion-card>
+        <p style="font-size: 10px;">{{rest.resName}} - {{rest.address}}</p>
+        <p style="font-size: 10px;">{{rest.category}}</p>  -->
+        <!-- <div class="reviews">
           <p style="font-size: 10px;">{{rest.rating}} <ion-icon style="color: goldenrod;" name="star"></ion-icon></p>
           <p style="font-size: 10px;">({{rest.reviews}} reviews)</p>
-        </div>
-      </ion-col>
-    </ion-row>
+        </div> -->
+      <!-- </ion-col> -->
+   
   </div>
 
-  <div class="nearby">
+  <!-- <div class="nearby">
     <h3>Popular</h3>
     <ion-row>
 
@@ -121,6 +130,6 @@
       </ion-col>
 
     </ion-row>
-  </div>
+  </div> -->
 
 </ion-content>

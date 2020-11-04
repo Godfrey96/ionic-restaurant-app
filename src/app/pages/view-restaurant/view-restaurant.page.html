@@ -1,0 +1,166 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>view_restaurant</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+
+  <div class="content">
+
+    <div class="cont-11" *ngFor="let res of array">
+      <ion-card>
+        <img style="width: 100%; height: 200px;" src="{{res.imgUrl}}" />
+      </ion-card>
+    
+      <div class="title">
+        <h3 style="margin-left: 10px;">{{res.resName}} - {{res.address}} </h3>
+      </div>
+    
+      <div class="cont">
+        <div class="address">
+          <!-- <p style="margin-left: 10px; font-size: 13px;">{{res.street}}</p> -->
+        </div>
+        <div class="rat-rev">
+          <p style="margin-right: 15px; font-size: 13px;">4.7</p>
+          <p style="margin-right: 15px; font-size: 13px;">(215 reviews)</p>
+        </div>
+      </div>
+    
+      <!-- <div class="cont" style="margin-bottom: -25px;">
+        <div class="work">
+          <p style="margin-left: 10px; font-size: 13px;">Working Hours</p> 
+        </div>
+        <div class="hrs">
+          <p style="margin-right: 15px; font-size: 13px;">7am - 6pm</p>
+        </div>
+      </div> -->
+    
+      <div class="cont" style="margin-bottom: -20px;">
+        <div class="phne">
+          <p style="margin-left: 10px; font-size: 13px;">Phone</p>
+        </div>
+        <div class="num">
+          <p style="margin-right: 15px; font-size: 13px;">+27{{res.phone}}</p>
+        </div>
+      </div>
+    
+      <div class="cont" style="margin-top: -25px;">
+        <div class="web">
+          <p style="margin-left: 10px; font-size: 13px;">Website</p>
+        </div>
+        <div class="url">
+          <p style="margin-right: 15px;font-size: 13px;">{{res.website}}</p>
+        </div>
+      </div>
+    </div>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col class="line">
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <h3 style="font-weight: bold;">Menu</h3>
+      <ion-row>
+        <ion-col size="4" *ngFor="let x of array1">
+          <ion-card style="width: 100px; height: 130px;">
+            <img style="width: 100%; height: 60px;" src="{{x.imgUrl}}">
+            <ion-card-subtitle>
+              <p style="margin-left: 5px;">{{x.description }}</p>
+            </ion-card-subtitle>
+            <ion-card-subtitle style="margin-left: 5px; font-weight: bold;">{{x.price | currency: 'ZAR '}}</ion-card-subtitle>
+          </ion-card>
+        </ion-col>
+        <!-- <ion-col size="4">
+          <ion-card>
+            <img src="https://dealzone.co.za/images/di/25/1378442215_b.jpg">
+            <ion-card-subtitle>
+              <p >Burgers, chicken</p>
+            </ion-card-subtitle>
+            <ion-card-subtitle>R50</ion-card-subtitle>
+          </ion-card>
+        </ion-col> -->
+        <!-- <ion-col size="4">
+          <ion-card>
+            <img src="https://dealzone.co.za/images/di/25/1378442215_b.jpg">
+            <ion-card-subtitle>
+              <p >Chips</p>
+            </ion-card-subtitle>
+            <ion-card-subtitle>R30</ion-card-subtitle>
+          </ion-card>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col class="line">
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <h3>Reviews</h3>
+      <ion-row>
+        <ion-col>
+  
+          <ion-list>
+            <ion-item>
+              <ion-avatar slot="start">
+                <img src="./avatar-finn.png">
+              </ion-avatar>
+              <ion-label>
+                <h2>Finn</h2>
+                <h3>Stars</h3>
+                <p>Listen, I've had a pretty messed up day...</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+  
+          <ion-card>
+            <img src="">
+            <p>Godfrey</p>
+            <ion-card-header>
+              <ion-card-subtitle>
+                stars
+              </ion-card-subtitle>
+              <ion-card-subtitle>
+                They sell delicious food
+              </ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col class="line">
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <!-- <div class="book">
+      <ion-button>Book a table</ion-button>
+    </div> -->
+  
+    <ion-button class="btnsignup">
+      Book a table
+    </ion-button>
+
+  </div>
+
+  <div *ngFor="let res of array">
+     
+  </div>
+
+
+
+
+</ion-content>

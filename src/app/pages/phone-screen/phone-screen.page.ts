@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, PopoverController } from '@ionic/angular';
 
 import firebase from 'firebase/app';
+import 'firebase/auth'
 
 //require('firebase/firestore');
-require('firebase/auth');
+// require('firebase/auth');
 
 @Component({
   selector: 'app-phone-screen',
