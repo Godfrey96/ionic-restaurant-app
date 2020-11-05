@@ -67,7 +67,12 @@ export class RestaurantsService {
   // }
 
 
-  getRestaurantById(id){
-    return firebase.firestore().collection('restaurants').doc(id).get()
+  // getRestaurantById(id){
+  //   return firebase.firestore().collection('restaurants').doc(id).get()
+  // }
+
+  // Make a booking
+  booking() {
+    return firebase.firestore().collection('restaurants');
   }
 }

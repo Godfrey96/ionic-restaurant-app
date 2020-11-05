@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Make a Booking</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content">
+
+    <div class="cont-11">
+      <ion-card>
+        <img style="width: 100%; height: 200px;"
+          src="https://sifu.unileversolutions.com/image/en-ZA/recipe-topvisual/2/1260-709/ostrich-burger-50255311.jpg" />
+      </ion-card>
+
+      <div class="title">
+        <h3 style="margin-left: 10px;">Book a table</h3>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="line">
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="cont-1">
+        <form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
+          <ion-list>
+            <ion-input formControlName="date" style="margin-bottom: 10px;" type="date" placeholder="select date">
+            </ion-input>
+            <ion-input formControlName="time" style="margin-bottom: 10px;" type="time" placeholder="What time?"></ion-input>
+            <ion-item>
+              <ion-label>How many quests?</ion-label>
+              <ion-select formControlName="guests" placeholder="Please select">
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+                <ion-select-option value="5">5</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Seating preference</ion-label>
+              <ion-select formControlName="preference" placeholder="Please select">
+                <ion-select-option value="1">Indoor Table Spacing</ion-select-option>
+                <ion-select-option value="2">Table Size</ion-select-option>
+                <ion-select-option value="3">Bar Seating</ion-select-option>
+                <ion-select-option value="4">Outdoor Table Seating</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+          </ion-list>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="line">
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-input formControlName="firstName" style="margin-bottom: 10px;" type="text" placeholder="First name">
+          </ion-input>
+          <ion-input formControlName="lastName" style="margin-bottom: 10px;" type="text" placeholder="Last name">
+          </ion-input>
+          <ion-input formControlName="mobile" style="margin-bottom: 10px;" type="number" placeholder="mobile">
+          </ion-input>
+          <ion-input formControlName="email" style="margin-bottom: 10px;" type="email" placeholder="email">
+          </ion-input>
+
+          <ion-button class="btnsignup" (click)="addBooking()" fill="clear" *ngIf="!spin">
+            Continue
+          </ion-button>
+        </form>
+        <div class="ion-text-center" *ngIf="spin">
+          <ion-spinner color="primary"></ion-spinner>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'view-restaurant/:id',
     loadChildren: () => import('./pages/view-restaurant/view-restaurant.module').then( m => m.ViewRestaurantPageModule)
   },
+  {
+    path: 'view-restaurant/make-a-booking/:id',
+    loadChildren: () => import('./pages/make-a-booking/make-a-booking.module').then( m => m.MakeABookingPageModule)
+  },
 ];
 
 @NgModule({

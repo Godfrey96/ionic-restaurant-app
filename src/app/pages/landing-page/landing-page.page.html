@@ -22,9 +22,9 @@
     <ion-row>
 
       <ion-col size="4" *ngFor="let rest of restaurants">
-        <img style="width: 150px; height: 100px; margin-left: 10px;" src="{{rest.imgUrl}}" [routerLink]="'/view-restaurant/'+ rest?.ownerId" />
+        <img style="width: 150px; height: 100px;" src="{{rest.imgUrl}}" [routerLink]="'/view-restaurant/'+ rest?.ownerId" />
         <div class="head">
-          <p style="font-size: 10px; margin-left: 10px;">{{rest.resName}} - {{rest.address}}</p>
+          <p style="font-size: 8px;">{{rest.resName}} - {{rest.address}}</p>
         <p style="font-size: 10px; margin-left: 10px;">{{rest.category}}</p>
         </div>
       </ion-col>
