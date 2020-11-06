@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  displayName: string;
+  name: string;
   phoneNumber: string;
-  dp: string;
+  dp: string; 
 
   constructor() { 
-    this.displayName = localStorage.getItem("displayName");
+    this.name = localStorage.getItem("name");
     this.phoneNumber = localStorage.getItem("phoneNumber");
-    this.dp = "https://ui-avatars.com/api/?background=ff7f50" + "&color=ffffff&size=128&bold=true&name=" + this.displayName;
+    this.dp = "https://ui-avatars.com/api/?background=ff7f50" + "&color=ffffff&size=128&bold=true&name=" + this.name;
   }
 
   ngOnInit() {

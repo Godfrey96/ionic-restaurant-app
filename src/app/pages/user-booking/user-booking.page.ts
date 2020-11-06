@@ -45,6 +45,20 @@ export class UserBookingPage implements OnInit {
       });
     });
 
+    
+    
   }
+
+  deleteBooking(){
+    firebase.firestore().collection("restaurants").doc(this.id).collection('bookings').doc(this.id).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+  }
+
+  
+
+  
 
 }

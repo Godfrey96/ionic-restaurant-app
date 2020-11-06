@@ -91,39 +91,27 @@
       </ion-row>
     </ion-grid>
   
-    <!-- <ion-grid>
+    <ion-grid>
       <h3>Reviews</h3>
       <ion-row>
         <ion-col>
   
-          <ion-list>
+          <ion-list *ngFor="let rev of arrayReviews">
             <ion-item>
               <ion-avatar slot="start">
-                <img src="./avatar-finn.png">
+                <img src="{{dp}}" style="border-radius: 100%;" />
               </ion-avatar>
               <ion-label>
-                <h2>Finn</h2>
-                <h3>Stars</h3>
-                <p>Listen, I've had a pretty messed up day...</p>
+                <h2>{{name}}</h2>
+                <!-- <h3 >Stars</h3> -->
+                <p>{{rev.review}}</p>
               </ion-label>
             </ion-item>
           </ion-list>
-  
-          <ion-card>
-            <img src="">
-            <p>Godfrey</p>
-            <ion-card-header>
-              <ion-card-subtitle>
-                stars
-              </ion-card-subtitle>
-              <ion-card-subtitle>
-                They sell delicious food
-              </ion-card-subtitle>
-            </ion-card-header>
-          </ion-card>
+
         </ion-col>
       </ion-row>
-    </ion-grid> -->
+    </ion-grid>
   
     <!-- <ion-grid>
       <ion-row>

@@ -48,11 +48,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'user-booking',
+    path: 'user-booking/:id',
     loadChildren: () => import('./pages/user-booking/user-booking.module').then( m => m.UserBookingPageModule)
   },
   {
-    path: 'reviews',
+    path: 'reviews/:id',
     loadChildren: () => import('./pages/reviews/reviews.module').then( m => m.ReviewsPageModule)
   },
 ];

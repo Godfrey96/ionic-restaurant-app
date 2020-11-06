@@ -84,7 +84,8 @@ export class MakeABookingPage implements OnInit {
     }).catch(function(error){
       console.log(error);
     });
-    this.nav.navigateRoot('/user-booking')
+    //this.nav.navigateRoot('/user-booking/'+this.ownerId)
+    this.nav.navigateRoot('/reviews/'+this.ownerId)
     this.bookingForm.reset();
   }
 
