@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Leave a Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content">
+    <ion-row>
+      <ion-col>
+        <h3>Leave a review for Restaurant name</h3>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="reviewForm" (ngSubmit)="reviewSubmit()">
+      <ion-item>
+        <ion-textarea formControlName="review" type="text" placeholder="Please leave a review"></ion-textarea>
+      </ion-item>
+
+      <ion-button class="btnsignup" (click)="reviewSubmit()" fill="clear">
+        Submit
+      </ion-button>
+
+    </form>
+
+    
+
+  </div>
+
+</ion-content>

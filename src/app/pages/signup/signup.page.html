@@ -16,10 +16,14 @@
     </div>
 
     <div class="cont-1">
-      <ion-input id="firstName" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
-      <!-- <ion-input style="margin-bottom: 10px;" type="text" placeholder="Last name"></ion-input>
-      <ion-input style="margin-bottom: 10px;" type="email" placeholder="Email"></ion-input> -->
-      <!-- <ion-input style="margin-bottom: 10px;" type="number" placeholder="Mobile"></ion-input> -->
+      <ion-input id="displayName" style="margin-bottom: 10px;" type="text" placeholder="Display name"></ion-input>
+      <form [formGroup]="completeForm" (ngSubmit)="completeSignup()">
+        <ion-input formControlName="firstName" id="firstName" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
+        <ion-input formControlName="lastName" style="margin-bottom: 10px;" type="text" placeholder="Last name"></ion-input>
+        <ion-input formControlName="email" style="margin-bottom: 10px;" type="email" placeholder="Email"></ion-input>
+        <ion-input formControlName="mobile" style="margin-bottom: 10px;" type="number" placeholder="Mobile"></ion-input>
+      </form>
+
       <!-- <ion-input style="margin-bottom: 10px;" type="password" placeholder="Password"></ion-input> -->
     </div>
 

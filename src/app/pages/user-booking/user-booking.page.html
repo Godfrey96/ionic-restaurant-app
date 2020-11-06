@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="landing-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Bookings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content" style="margin-top: 50px;">
+
+    <!-- <div class="cont-2">
+      <h2 style=" margin-bottom: 10px;"><b>View Bookings</b></h2>
+    </div> -->
+
+    <ion-card>
+      <ion-card-title style="margin-left: 18px;"></ion-card-title>
+      <ion-card-content>
+      
+        <ion-grid>
+          <ion-row>
+            <ion-col class="line">
+              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-row *ngFor="let book of booking">
+          <ion-col size="8">
+            <p>Restaurant Name: {{book.resName}}</p>
+            <p>Guests: {{book?.guests}} </p>
+            <p>Seating Preference: {{book?.preference}}</p>
+            <p>Date: {{book?.date}}</p>
+            <p></p>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button color="success" size="small" shape="round">Edit</ion-button>
+            <ion-button color="danger" size="small" shape="round">Cancel</ion-button>
+            <!-- <ion-button color="danger" size="small" shape="round">Decline</ion-button> -->
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>

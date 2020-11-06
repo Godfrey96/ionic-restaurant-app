@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="view-restaurant/make-a-booking/"></ion-back-button>
+    </ion-buttons>
     <ion-title>Make a Booking</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -46,10 +49,10 @@
             <ion-item>
               <ion-label>Seating preference</ion-label>
               <ion-select formControlName="preference" placeholder="Please select">
-                <ion-select-option value="1">Indoor Table Spacing</ion-select-option>
-                <ion-select-option value="2">Table Size</ion-select-option>
-                <ion-select-option value="3">Bar Seating</ion-select-option>
-                <ion-select-option value="4">Outdoor Table Seating</ion-select-option>
+                <ion-select-option >Indoor Table Spacing</ion-select-option>
+                <ion-select-option >Table Size</ion-select-option>
+                <ion-select-option >Bar Seating</ion-select-option>
+                <ion-select-option >Outdoor Table Seating</ion-select-option>
               </ion-select>
             </ion-item>
 

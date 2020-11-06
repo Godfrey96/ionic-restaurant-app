@@ -1,12 +1,17 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar>
-    <ion-title>view_restaurant</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="landing-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{restaurants?.resName}} Restaurant</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content>
 
   <div class="content">
+
+    
 
     <div class="cont-11">
       <ion-card>
@@ -14,17 +19,17 @@
       </ion-card>
     
       <div class="title">
-        <h3 style="margin-left: 10px;">{{restaurants?.resName}} - {{restaurants?.address}} </h3>
+        <h3 style="margin-left: 10px;">{{restaurants?.resName}} - {{restaurants?.address?.provice}} </h3>
       </div>
     
       <div class="cont">
-        <div class="address">
-          <!-- <p style="margin-left: 10px; font-size: 13px;">{{res.street}}</p> -->
+        <!-- <div class="address">
+          <p style="margin-left: 10px; font-size: 13px;">{{restaurants?.street}}</p>
         </div>
         <div class="rat-rev">
           <p style="margin-right: 15px; font-size: 13px;">4.7</p>
           <p style="margin-right: 15px; font-size: 13px;">(215 reviews)</p>
-        </div>
+        </div> -->
       </div>
     
       <!-- <div class="cont" style="margin-bottom: -25px;">
@@ -86,7 +91,7 @@
       </ion-row>
     </ion-grid>
   
-    <ion-grid>
+    <!-- <ion-grid>
       <h3>Reviews</h3>
       <ion-row>
         <ion-col>
@@ -118,21 +123,21 @@
           </ion-card>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
   
-    <ion-grid>
+    <!-- <ion-grid>
       <ion-row>
         <ion-col class="line">
           
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
   
     <!-- <div class="book">
       <ion-button>Book a table</ion-button>
     </div> -->
   
-    <ion-button class="btnsignup" *ngFor="let res of array" [routerLink]="'/view-restaurant/make-a-booking/'+res.ownerId">
+    <ion-button class="btnsignup" [routerLink]="'/view-restaurant/make-a-booking/'+restaurants?.ownerId">
       Book a table
     </ion-button>
 

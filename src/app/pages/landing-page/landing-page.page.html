@@ -1,14 +1,19 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar>
-    <ion-title>landing-page</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Welcome to The Page</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content>
 
-  <div class="search">
+  <div class="content">
+
+    <!-- <div class="search">
     <ion-searchbar></ion-searchbar>
-  </div>
+  </div> -->
 
   <div class="advert">
     <ion-card>
@@ -18,13 +23,13 @@
   </div>
 
   <div class="nearby">
-    <h3>Nearby</h3>
+    <p style="margin-left: 15px;">Listing of available Restaurants</p>
     <ion-row>
 
       <ion-col size="4" *ngFor="let rest of restaurants">
-        <img style="width: 150px; height: 100px;" src="{{rest.imgUrl}}" [routerLink]="'/view-restaurant/'+ rest?.ownerId" />
+        <img style="width: 150px; height: 100px; margin-left: 10px;" src="{{rest.imgUrl}}" [routerLink]="'/view-restaurant/'+ rest?.ownerId" />
         <div class="head">
-          <p style="font-size: 8px;">{{rest.resName}} - {{rest.address}}</p>
+          <p style="font-size: 8px; margin-left: 10px;">{{rest.resName}} - {{rest.address.province | json}}</p>
         <p style="font-size: 10px; margin-left: 10px;">{{rest.category}}</p>
         </div>
       </ion-col>
@@ -131,5 +136,9 @@
 
     </ion-row>
   </div> -->
+
+  </div>
+
+  
 
 </ion-content>

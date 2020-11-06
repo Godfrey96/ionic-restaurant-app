@@ -28,11 +28,11 @@ export class PhoneScreenPage implements OnInit {
     public popoverController: PopoverController
   ) {
     //keep track of currently selected country code
-    setInterval(() => {
-      if (sessionStorage.getItem("code")) {
-        this.code = sessionStorage.getItem("code")
-      }
-    }, 100);
+    // setInterval(() => {
+    //   if (sessionStorage.getItem("code")) {
+    //     this.code = sessionStorage.getItem("code")
+    //   }
+    // }, 100);
   }
 
   // ionViewDidLoad() {

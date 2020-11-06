@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="landing-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content">
+
+    <!-- Profile Info -->
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img src="{{dp}}" style="border-radius: 100%;" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{displayName}}</h2>
+        <p>{{phoneNumber}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="line">
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- <div class="cont-1" style="margin-top: 50px;">
+      <ion-grid >
+        <ion-item>
+          <ion-icon name="book" style="margin-right: 8px;"></ion-icon>
+          My Bookings
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="key" style="margin-right: 8px;"></ion-icon>
+          Account
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="home" style="margin-right: 8px;"></ion-icon>
+          My Address
+        </ion-item>
+  
+        <ion-item>
+          <ion-icon name="log-out" style="margin-right: 8px;"></ion-icon>
+          Logout 
+        </ion-item>
+      </ion-grid>
+    </div> -->
+
+  </div>
+
+</ion-content>

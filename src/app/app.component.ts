@@ -1,6 +1,7 @@
+import { RestaurantsService } from './services/restaurants.service';
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import firebase from 'firebase/app';
@@ -27,7 +28,9 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private restaurantService: RestaurantsService,
+    private nav: NavController
   ) {
     this.initializeApp();
     // Initialize Firebase
@@ -39,5 +42,11 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  logout(){
+    this.restaurantService.logoutOwner();
+    this.restaurantService.signAuth();
+    this.nav.navigateRoot('/phone-screen')
   }
 }

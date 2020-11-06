@@ -4,6 +4,7 @@ import { RestaurantsService } from '../../services/restaurants.service'
 
 import firebase from 'firebase/app';
 import 'firebase/firestore'
+import { MenuController } from '@ionic/angular';
 // require('firebase/firestore');
 
 
@@ -19,15 +20,12 @@ export class LandingPagePage implements OnInit {
   id: any;
 
 
-  constructor(private restaurantService: RestaurantsService) { }
+  constructor(private restaurantService: RestaurantsService, private menuCtrl: MenuController) { }
 
   ngOnInit() {
     firebase.firestore().collection('restaurants').onSnapshot(res => {
       res.forEach(element => {
         this.restaurants.push(element.data());
-        // console.log(this.restaurants)
-        // console.log(element.data().resName)
-        // console.log(element.id)
       });
     });
     

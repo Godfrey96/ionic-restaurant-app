@@ -1,6 +1,7 @@
+import { NavController } from '@ionic/angular';
 import { RestaurantsService } from './../../services/restaurants.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import firebase from 'firebase/app';
@@ -16,7 +17,11 @@ export class MakeABookingPage implements OnInit {
   uid = this.activatedActivated.snapshot.params.id;
   id: any;
   ownerId: any
+  userId: any;
   array:any=[]
+
+  resName: any;
+  resResult: any;
 
   bookingForm: FormGroup;
 
@@ -25,28 +30,23 @@ export class MakeABookingPage implements OnInit {
   constructor(
               private activatedActivated: ActivatedRoute,
               private fb: FormBuilder,
-              private restaurantService: RestaurantsService
+              private restaurantService: RestaurantsService,
+              private nav: NavController
     ) { }
 
   ngOnInit() {
+    this.restaurantService.signAuth();
 
     this.id = this.activatedActivated.snapshot.paramMap.get('id')
     console.log('ID: ', this.id)
+    
     console.log(this.uid)
-    // this.id = this.activatedActivated.snapshot.paramMap.get('id')
-    // console.log('ID: ', this.id)
-    // console.log(this.uid)
 
-    // firebase.firestore().collection('restaurants').where('ownerId', '==', this.uid).get().then(snapshot => {
-    //   snapshot.docs.forEach(restaurant => {
-    //      this.array.push( restaurant.data())
-    //     console.log('res: ',this.array)
-    //   })
-    // })
     this.bookingData();
   }
   bookingData(){
     this.bookingForm = this.fb.group({
+      //resName: ['', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
       guests: ['', Validators.required],
@@ -59,10 +59,18 @@ export class MakeABookingPage implements OnInit {
   }
 
   addBooking(){
+    const user = firebase.auth().currentUser;
+    this.userId = user.uid;
+    console.log('userId: ', this.userId)
+
     this.ownerId = this.uid
-    console.log('owner Id: ', this.ownerId)
+    
+    //.collection('users').doc(this.userId)
+
     this.restaurantService.booking().doc(this.uid).collection('bookings').add({
+      userId: this.userId,
       ownerId: this.uid,
+      // resName: this.bookingForm.value.resName,
       date: this.bookingForm.value.date,
       time: this.bookingForm.value.time,
       guests: this.bookingForm.value.guests,
@@ -76,6 +84,7 @@ export class MakeABookingPage implements OnInit {
     }).catch(function(error){
       console.log(error);
     });
+    this.nav.navigateRoot('/user-booking')
     this.bookingForm.reset();
   }
 

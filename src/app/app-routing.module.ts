@@ -43,6 +43,18 @@ const routes: Routes = [
     path: 'view-restaurant/make-a-booking/:id',
     loadChildren: () => import('./pages/make-a-booking/make-a-booking.module').then( m => m.MakeABookingPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'user-booking',
+    loadChildren: () => import('./pages/user-booking/user-booking.module').then( m => m.UserBookingPageModule)
+  },
+  {
+    path: 'reviews',
+    loadChildren: () => import('./pages/reviews/reviews.module').then( m => m.ReviewsPageModule)
+  },
 ];
 
 @NgModule({

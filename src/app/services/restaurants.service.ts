@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/firestore'
+import 'firebase/auth'
 // require('firebase/firestore');
 
 import { Restaurant } from '../model/restaurant';
@@ -42,37 +43,34 @@ export class RestaurantsService {
 
   constructor() { }
 
-  // getAllRestaurants(restaurant){
-    // firebase.firestore().collection('restaurants').onSnapshot(res => {
-    //   res.forEach(element => {
-    //     this.restaurants.push(element.data());
-    //   })
-    // })
-    // return [...this.restaurants]
-  //   const query = firebase.firestore().collection('restaurants');
-  //   this.getDocumentsInQuery(query, restaurant)
-  // }
-
-  // getDocumentsInQuery(query, restaurant){
-  //   query.onSnapshot(function(snapshot){
-  //     if(!snapshot.size) return restaurant.empty();
-  //     snapshot.docChanges().forEach(function(change){
-  //       if(change.type === 'removed'){
-  //         restaurant.remove(change.doc);
-  //       }else{
-  //         restaurant.display(change.doc);
-  //       }
-  //     });
-  //   });
-  // }
-
+  signAuth(){
+    return firebase.auth().onAuthStateChanged(user => {
+     if(user){
+      //  const email = user.email;
+      //  this.setSession(email);
+       console.log('user logged in: ', user);
+     }else{
+       console.log('user logged out')
+     }
+    });
+  }
 
   // getRestaurantById(id){
   //   return firebase.firestore().collection('restaurants').doc(id).get()
   // }
 
+  // Register new user
+  registerUser() {
+    return firebase.firestore().collection('users');
+  }
+
   // Make a booking
   booking() {
     return firebase.firestore().collection('restaurants');
+  }
+
+  //logout users
+  logoutOwner(){
+    return firebase.auth().signOut();
   }
 }
