@@ -1,7 +1,7 @@
 import { RestaurantsService } from './../../services/restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController,LoadingController, AlertController  } from '@ionic/angular';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -21,13 +21,15 @@ export class ViewRestaurantPage implements OnInit {
   array1: any = []
   arrayReviews: any = []
   restaurants: any = [];
-  menu: any;
+  //menu: any;
 
   name: string;
   phoneNumber: string;
   dp: string;
 
   constructor(
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
     public nav: NavController,
     private activatedActivated: ActivatedRoute,
     private restaurantService: RestaurantsService
@@ -45,6 +47,7 @@ export class ViewRestaurantPage implements OnInit {
     console.log('ID: ', this.id)
     console.log(this.uid)
 
+    // fetching single restaurant
     firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
       this.restaurants = snapshot.data();
       console.log('new data: ', this.restaurants)
@@ -59,7 +62,7 @@ export class ViewRestaurantPage implements OnInit {
     })
 
     // Fetching reviews
-    firebase.firestore().collection('restaurants').doc(this.uid).collection('reviews').where('ownerId', '==', this.uid).get().then(snapshot => {
+    firebase.firestore().collection('restaurants').doc(this.uid).collection('reviews').where('ownerId', '==', this.uid).limit(4).get().then(snapshot => {
       snapshot.docs.forEach(review => {
         this.arrayReviews.push(review.data());
         console.log('reviews new data: ', this.arrayReviews)
@@ -68,8 +71,13 @@ export class ViewRestaurantPage implements OnInit {
 
   }
 
-  btnBook() {
+  async btnBook() {
+
+    const loading = await this.loadingCtrl.create();
+
     this.nav.navigateRoot('/make-a-booking')
+    
+    return await loading.present();
   }
 
 }

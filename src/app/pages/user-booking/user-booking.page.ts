@@ -27,30 +27,39 @@ export class UserBookingPage implements OnInit {
 
   ngOnInit() {
     this.restaurantService.signAuth();
-    //const user = firebase.auth().currentUser;
-    //this.userId = user.uid;
+    const user = firebase.auth().currentUser;
+    this.userId = user.uid;
+    console.log('user id Booked: ', this.userId)
 
     this.id = this.activatedActivated.snapshot.paramMap.get('id')
     console.log('ID: ', this.id)
-    console.log('view user booking ID', this.uid)
+    console.log('view user booking ID', this.id)
 
+    // view user bookings details
+    // firebase.firestore().collection('restaurants').doc(this.id).collection('bookings').onSnapshot(res => {
+    //   res.forEach(element => {
+    //     this.booking.push(element.data());
+    //   });
+    // });
     firebase.firestore().collection('restaurants').doc(this.id).collection('bookings').onSnapshot(res => {
       res.forEach(element => {
         this.booking.push(element.data());
-        //this.router.navigateByUrl('/user-booking')
-        // console.log(this.menu)
-        // console.log(element.data().name)
-        // console.log(element.id)
-        //.collection('users').doc(this.userId)
       });
     });
 
-    
-    
   }
 
   deleteBooking(){
-    firebase.firestore().collection("restaurants").doc(this.id).collection('bookings').doc(this.id).delete().then(function() {
+    //delete collection and subcollections
+    // firebase.firestore().collection('restaurants').where('ownerId', '==', this.id).get().then(function(snapshot){
+    //   snapshot.forEach(function(doc){
+    //     doc.ref.delete();
+    //     console.log('delete: ', doc.data())
+    //   });
+    // });
+
+     // delete subcollection 
+    firebase.firestore().collection("restaurants").doc(this.id).collection('bookings').doc(this.userId).delete().then(function() {
       console.log("Document successfully deleted!");
     }).catch(function(error) {
       console.error("Error removing document: ", error);
