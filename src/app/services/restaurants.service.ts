@@ -55,10 +55,6 @@ export class RestaurantsService {
     });
   }
 
-  // getRestaurantById(id){
-  //   return firebase.firestore().collection('restaurants').doc(id).get()
-  // }
-
   // Register new user
   registerUser() {
     return firebase.firestore().collection('users');
@@ -72,5 +68,18 @@ export class RestaurantsService {
   //logout users
   logoutOwner(){
     return firebase.auth().signOut();
+  }
+
+  bookingStatus(ownerId, userId, value){
+    var db = firebase.firestore();
+    var restaurantRef = db.collection('restaurants').doc(ownerId);
+
+    var restaurant = Promise.all([
+      restaurantRef.collection('bookings').doc(userId).set({
+        status: value
+      }, { merge: true }).then(a => {
+        console.log('Changed')
+      })
+    ])
   }
 }

@@ -48,7 +48,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'user-booking/:id',
+    path: 'user-booking',
     loadChildren: () => import('./pages/user-booking/user-booking.module').then( m => m.UserBookingPageModule)
   },
   {

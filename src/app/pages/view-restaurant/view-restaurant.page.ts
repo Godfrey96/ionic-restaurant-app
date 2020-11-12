@@ -45,7 +45,7 @@ export class ViewRestaurantPage implements OnInit {
 
     this.id = this.activatedActivated.snapshot.paramMap.get('id')
     console.log('ID: ', this.id)
-    console.log(this.uid)
+    //console.log(this.uid)
 
     // fetching single restaurant
     firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {

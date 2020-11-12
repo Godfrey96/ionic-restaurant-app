@@ -87,7 +87,8 @@ export class ReviewsPage implements OnInit {
                 createdAt: new Date()
             }).then(() => {
               // this.nav.navigateRoot('/user-booking/'+this.ownerId)
-              this.nav.navigateRoot('/user-booking/'+this.userId)
+              this.nav.navigateRoot('/user-booking')
+              // this.nav.navigateRoot('/user-booking/'+this.userId)
               this.reviewForm.reset();
             }).catch(function (error) {
               console.log(error)

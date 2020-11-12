@@ -30,12 +30,56 @@ export class SignupPage implements OnInit {
   }
   completeSetup(){
     this.completeForm = this.fb.group({
-      firstName: ['', Validators.required],
+      name: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', Validators.required]
+     // mobile: ['', Validators.required]
     });
   }
+
+  get name() {
+    return this.completeForm.get("name");
+  }
+
+  get lastName() {
+    return this.completeForm.get("lastName");
+  }
+
+  get email() {
+    return this.completeForm.get("email");
+  }
+
+  // get mobile() {
+  //   return this.ownerForm.get("mobile");
+  // }
+
+  // get password() {
+  //   return this.ownerForm.get("password");
+  // }
+
+  public errorMessages = {
+    name: [
+      { type: 'required', message: 'first name is required' },
+      { type: 'maxLength', message: 'first name cannot be longer than 100 characters' }
+    ],
+    lastName: [
+      { type: 'required', message: 'Last name is required' },
+      { type: 'maxLength', message: 'Last name cannot be longer than 100 characters' }
+    ],
+    email: [
+      { type: 'required', message: 'Email is required' },
+      { type: 'pattern', message: 'Please provide valid email.' }
+    ]
+    // mobile: [
+    //   { type: 'required', message: 'Mobile number is required.' },
+    //   { type: 'pattern', message: 'Only numerical values allowed.' }
+    // ],
+    // password: [
+    //   { type: 'required', message: 'Password is required.' }
+    // ]
+  }
+
+
 
   completeSignup(){
     const user = firebase.auth().currentUser
@@ -47,7 +91,7 @@ export class SignupPage implements OnInit {
       firstName: this.completeForm.value.firstName,
       lastName: this.completeForm.value.lastName,
       email: this.completeForm.value.email,
-      mobile: this.completeForm.value.mobile
+      //mobile: this.completeForm.value.mobile
     }).then(function(docRef){
       console.log("Document written data: ", docRef);
     }).catch(function(error){

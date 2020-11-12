@@ -27,26 +27,23 @@ export class UserBookingPage implements OnInit {
 
   ngOnInit() {
     this.restaurantService.signAuth();
-    const user = firebase.auth().currentUser;
+    let user = firebase.auth().currentUser;
     this.userId = user.uid;
-    console.log('user id Booked: ', this.userId)
+    console.log('user id Booked: ', user)
 
-    this.id = this.activatedActivated.snapshot.paramMap.get('id')
-    console.log('ID: ', this.id)
-    console.log('view user booking ID', this.id)
+    const userBookings = firebase.firestore().collectionGroup('bookings').where('userId', '==', this.userId).orderBy('date', 'desc');
+    userBookings.get().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        this.booking.push(doc.data())
+        console.info('doc-id: ', doc.id, '=>', 'doc-data: ', doc.data());
+        console.log('userBookings: ', this.booking)
+      })
+    })
 
-    // view user bookings details
-    // firebase.firestore().collection('restaurants').doc(this.id).collection('bookings').onSnapshot(res => {
-    //   res.forEach(element => {
-    //     this.booking.push(element.data());
-    //   });
-    // });
-    firebase.firestore().collection('restaurants').doc(this.id).collection('bookings').onSnapshot(res => {
-      res.forEach(element => {
-        this.booking.push(element.data());
-      });
-    });
+  }
 
+  status(ownerId, userId, status){
+    this.restaurantService.bookingStatus(ownerId, userId, status);
   }
 
   deleteBooking(){

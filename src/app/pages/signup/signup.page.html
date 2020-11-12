@@ -16,12 +16,28 @@
     </div>
 
     <div class="cont-1">
-      <ion-input id="name" style="margin-bottom: 10px;" type="text" placeholder="Display name"></ion-input>
+      <!-- <ion-input id="name" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input> -->
       <form [formGroup]="completeForm" (ngSubmit)="completeSignup()">
-        <ion-input formControlName="firstName" id="firstName" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
+        <ion-input id="name" formControlName="name" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
+        <div *ngFor="let error of errorMessages.name">
+          <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+            <small style="color: red;" class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <!-- <ion-input formControlName="firstName" id="firstName" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input> -->
         <ion-input formControlName="lastName" style="margin-bottom: 10px;" type="text" placeholder="Last name"></ion-input>
+        <div *ngFor="let error of errorMessages.lastName">
+          <ng-container *ngIf="lastName.hasError(error.type) && (lastName.dirty || lastName.touched)">
+            <small style="color: red;" class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
         <ion-input formControlName="email" style="margin-bottom: 10px;" type="email" placeholder="Email"></ion-input>
-        <ion-input formControlName="mobile" style="margin-bottom: 10px;" type="number" placeholder="Mobile"></ion-input>
+        <div *ngFor="let error of errorMessages.email">
+          <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+            <small style="color: red;" class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <!-- <ion-input formControlName="mobile" style="margin-bottom: 10px;" type="number" placeholder="Mobile"></ion-input> -->
       </form>
 
       <!-- <ion-input style="margin-bottom: 10px;" type="password" placeholder="Password"></ion-input> -->
