@@ -16,8 +16,10 @@ export class UserBookingPage implements OnInit {
   id: any;
   ownerId: any
   userId: any;
+  resName: any
 
   booking: Array<any> = [];
+  restaurants: any
 
   constructor(
               private activatedActivated: ActivatedRoute, 
@@ -26,6 +28,19 @@ export class UserBookingPage implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    // this.id = this.activatedActivated.snapshot.paramMap.get('id')
+    // console.log('ID: ', this.id)
+    // //console.log(this.uid)
+
+    // // fetching single restaurant
+    // firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
+    //   this.restaurants = snapshot.data();
+    //   console.log('new data: ', this.restaurants)
+    //   this.resName = snapshot.get('resName');
+    //   console.log('resName: ', this.resName)
+    // });
+
     this.restaurantService.signAuth();
     let user = firebase.auth().currentUser;
     this.userId = user.uid;
@@ -47,13 +62,6 @@ export class UserBookingPage implements OnInit {
   }
 
   deleteBooking(){
-    //delete collection and subcollections
-    // firebase.firestore().collection('restaurants').where('ownerId', '==', this.id).get().then(function(snapshot){
-    //   snapshot.forEach(function(doc){
-    //     doc.ref.delete();
-    //     console.log('delete: ', doc.data())
-    //   });
-    // });
 
      // delete subcollection 
     firebase.firestore().collection("restaurants").doc(this.id).collection('bookings').doc(this.userId).delete().then(function() {

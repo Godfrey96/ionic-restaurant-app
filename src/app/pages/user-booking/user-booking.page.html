@@ -36,6 +36,7 @@
             <!-- <p>Status: {{book.status}}</p> -->
             <p *ngIf="book.status == 'Pending'">Status: {{book.status}}</p> 
             <p *ngIf="book.status == 'Declined'">Status: {{book.status}}</p> 
+            <p *ngIf="book.status == 'Approved'">Status: {{book.status}}</p> 
             <p></p>
           </ion-col>
           <ion-col size="4">
@@ -43,6 +44,7 @@
             <p (click)="status(book.ownerId, book.uid, 'Pending')"></p>
             <!-- <ion-button (click)="status(book.ownerId, book.uid, 'Approved')" color="success" size="small" shape="round" name="selected">Confirm</ion-button> -->
             <ion-button (click)="status(book.ownerId, book.uid, 'Declined')" color="danger" size="small" shape="round">Decline</ion-button>
+            <!-- <ion-button (click)="status(book.ownerId, book.uid, 'Declined')" color="danger" size="small" shape="round">Decline</ion-button> -->
 
             <!-- <ion-button color="success" size="small" shape="round">Edit</ion-button>
             <ion-button color="danger" size="small" shape="round" (click)="deleteBooking()">Cancel</ion-button> -->

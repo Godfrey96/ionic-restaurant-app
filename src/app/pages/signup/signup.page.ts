@@ -88,7 +88,7 @@ export class SignupPage implements OnInit {
 
     this.restaurantService.registerUser().doc(this.userId).set({
       userId: this.userId,
-      firstName: this.completeForm.value.firstName,
+      name: this.completeForm.value.name,
       lastName: this.completeForm.value.lastName,
       email: this.completeForm.value.email,
       //mobile: this.completeForm.value.mobile
@@ -100,16 +100,16 @@ export class SignupPage implements OnInit {
     this.nav.navigateRoot('/landing-page');
     this.completeForm.reset();
 
-    var name = (<HTMLInputElement>document.getElementById("name")).value;
+    var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
 
     this.spin = true;
 
     // const user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: name,
+      displayName: firstName,
     }).then(() => {
-      localStorage.setItem("Display Name: ", name);
-      console.log('disp: ', name)
+      localStorage.setItem("Display Name: ", firstName);
+      console.log('disp: ', firstName)
       this.nav.navigateRoot('/landing-page')
     })
   }

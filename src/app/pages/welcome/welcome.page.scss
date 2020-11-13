@@ -1,15 +1,30 @@
 
-ion-content.background{
-    --background:url(../../../assets/images/bg.jpg) 0 0/100% 100% no-repeat;
-    // --background: #50A581;
+// ion-content.background{
+//     --background:url(../../../assets/images/bg.jpg) 0 0/100% 100% no-repeat;
+//     // --background: #50A581;
+// }
+
+ion-content{
+    --overflow: hidden;
+    text-align: center;
+    --background: #50A581;
 }
 
-head{
+.img{
     display: flex;
     flex-direction: column;
-    // justify-content: flex-start;
-    // align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-top: -50px;
 }
+
+// head{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     // justify-content: flex-start;
+//     // align-items: flex-start;
+// }
 
 .btns{
     display: flex;

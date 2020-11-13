@@ -17,13 +17,15 @@ export class ViewRestaurantPage implements OnInit {
   // resDetails: any = {};
   // res: any = {};
   id: any;
+  name: any;
   array: any = []
-  array1: any = []
+  arrayMenus: any = []
   arrayReviews: any = []
   restaurants: any = [];
+  profile: any
   //menu: any;
 
-  name: string;
+  // name: string;
   phoneNumber: string;
   dp: string;
 
@@ -56,20 +58,31 @@ export class ViewRestaurantPage implements OnInit {
     // Fetching menus
     firebase.firestore().collection('restaurants').doc(this.uid).collection('menu').where('ownerId', '==', this.uid).limit(3).get().then(snapshot => {
       snapshot.docs.forEach(menu => {
-        this.array1.push(menu.data())
-        console.log('menu: ', this.array1)
+        this.arrayMenus.push(menu.data())
+        console.log('menu: ', this.arrayMenus)
+
       })
     })
 
     // Fetching reviews
-    firebase.firestore().collection('restaurants').doc(this.uid).collection('reviews').where('ownerId', '==', this.uid).limit(4).get().then(snapshot => {
+    firebase.firestore().collection('restaurants').doc(this.uid).collection('reviews').where('ownerId', '==', this.uid).orderBy('createdAt', 'desc').limit(4).get().then(snapshot => {
       snapshot.docs.forEach(review => {
         this.arrayReviews.push(review.data());
         console.log('reviews new data: ', this.arrayReviews)
       })
     });
 
+    let user = firebase.auth().currentUser.uid
+    console.log('User: ', user)
+
+    //Fetching users
+    firebase.firestore().collection('users').doc(user).get().then(snapshot => {
+      this.profile = snapshot.data();
+      console.log('new profile: ', this.profile)
+    })
+
   }
+
 
   async btnBook() {
 

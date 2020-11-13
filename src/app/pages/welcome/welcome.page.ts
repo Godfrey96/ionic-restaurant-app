@@ -8,13 +8,20 @@ import { Router } from '@angular/router';
 })
 export class WelcomePage implements OnInit {
 
+  slideOpts = {
+    initialSlide: 0,
+    autoplay: true,
+    speed: 1000
+  };
+
+
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  signup(){
-    this.router.navigateByUrl('/signup');
+  slides(){
+    this.router.navigateByUrl('/slides');
   }
 
 }

@@ -1,5 +1,5 @@
 import { NavController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantsService } from './../../services/restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -22,6 +22,8 @@ export class ReviewsPage implements OnInit {
   id: any;
   restaurants: Array<any> = [];
   restaurant: any
+  profile: any
+  name: any
 
   constructor(
             public loadingCtrl: LoadingController,
@@ -29,18 +31,13 @@ export class ReviewsPage implements OnInit {
             private restaurantService: RestaurantsService, 
             private fb: FormBuilder,
             private activatedRoute: ActivatedRoute,
-            private nav: NavController
+            private nav: NavController,
+            private router: Router
     ) { }
 
   ngOnInit() {
     this.restaurantService.signAuth();
     this.addReview();
-
-    // firebase.firestore().collection('restaurants').onSnapshot(res => {
-    //   res.forEach(element => {
-    //     this.restaurants.push(element.data());
-    //   });
-    // });
 
     this.id = this.activatedRoute.snapshot.paramMap.get('id')
     console.log('ID: ', this.id)
@@ -51,6 +48,16 @@ export class ReviewsPage implements OnInit {
       console.log('new data: ', this.restaurant)
     });
 
+    let user = firebase.auth().currentUser.uid
+    console.log('User: ', user)
+
+    //Fetching user
+    firebase.firestore().collection('users').doc(user).get().then(snapshot => {
+      this.profile = snapshot.data();
+      console.log('new data: ', this.profile)
+      this.name = snapshot.get('name')
+      console.log('name: ', this.name)
+    })
     
   }
 
@@ -83,11 +90,13 @@ export class ReviewsPage implements OnInit {
             firebase.firestore().collection('restaurants').doc(this.id).collection('reviews').add({
                 ownerId: this.id,
                 userId: this.userId,
+                name: this.name,
                 review: this.reviewForm.value.review,
                 createdAt: new Date()
             }).then(() => {
               // this.nav.navigateRoot('/user-booking/'+this.ownerId)
               this.nav.navigateRoot('/user-booking')
+              // this.router.navigate(['/user-booking', this.id])
               // this.nav.navigateRoot('/user-booking/'+this.userId)
               this.reviewForm.reset();
             }).catch(function (error) {
