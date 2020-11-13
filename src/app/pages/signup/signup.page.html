@@ -16,9 +16,9 @@
     </div>
 
     <div class="cont-1">
-      <!-- <ion-input id="name" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input> -->
+      <ion-input id="name" style="margin-bottom: 10px;" type="text" placeholder="Username"></ion-input>
       <form [formGroup]="completeForm" (ngSubmit)="completeSignup()">
-        <ion-input id="firstName" formControlName="name" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
+        <ion-input formControlName="name" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
         <div *ngFor="let error of errorMessages.name">
           <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
             <small style="color: red;" class="error-message">{{error.message}}</small>

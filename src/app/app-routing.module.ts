@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'slides',
+    redirectTo: 'welcome',
     pathMatch: 'full'
   },
   {

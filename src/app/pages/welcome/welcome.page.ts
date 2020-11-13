@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,8 +20,14 @@ export class WelcomePage implements OnInit {
   ngOnInit() {
   }
 
-  slides(){
-    this.router.navigateByUrl('/slides');
-  }
+  ngAfterViewInit() {
+    setTimeout(() => {
+       this.router.navigate(["/slides"]);
+    }, 3000);
+   }
+
+  // slides(){
+  //   this.router.navigateByUrl('/slides');
+  // }
 
 }

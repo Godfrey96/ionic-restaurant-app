@@ -24,6 +24,8 @@ export class ReviewsPage implements OnInit {
   restaurant: any
   profile: any
   name: any
+  rests: any
+  resName: any
 
   constructor(
             public loadingCtrl: LoadingController,
@@ -47,6 +49,19 @@ export class ReviewsPage implements OnInit {
       this.restaurant = snapshot.data();
       console.log('new data: ', this.restaurant)
     });
+
+    // this.id = this.activatedActivated.snapshot.paramMap.get('id')
+    // console.log('ID: ', this.id)
+    // //console.log(this.uid)
+
+    // // fetching single restaurant
+    firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
+      this.rests = snapshot.data();
+      console.log('new data: ', this.restaurants)
+      this.resName = snapshot.get('resName');
+      console.log('resName: ', this.resName)
+    });
+
 
     let user = firebase.auth().currentUser.uid
     console.log('User: ', user)

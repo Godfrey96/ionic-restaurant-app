@@ -100,16 +100,16 @@ export class SignupPage implements OnInit {
     this.nav.navigateRoot('/landing-page');
     this.completeForm.reset();
 
-    var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
+    var name = (<HTMLInputElement>document.getElementById("name")).value;
 
     this.spin = true;
 
     // const user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: firstName,
+      displayName: name,
     }).then(() => {
-      localStorage.setItem("Display Name: ", firstName);
-      console.log('disp: ', firstName)
+      localStorage.setItem("Display Name: ", name);
+      console.log('disp: ', name)
       this.nav.navigateRoot('/landing-page')
     })
   }
