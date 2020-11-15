@@ -78,7 +78,7 @@ export class RestaurantsService {
       restaurantRef.collection('bookings').doc(userId).set({
         status: value
       }, { merge: true }).then(a => {
-        console.log('Changed')
+        console.log('Changed: ', a)
       })
     ])
   }

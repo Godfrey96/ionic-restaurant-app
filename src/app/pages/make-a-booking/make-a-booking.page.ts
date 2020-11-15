@@ -60,6 +60,8 @@ export class MakeABookingPage implements OnInit {
     // fetching single restaurant
     firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
       this.restaurants = snapshot.data();
+      this.resName = snapshot.get('resName');
+      console.log('Booking-resName: ', this.resName)
       console.log('new data: ', this.restaurants)
     });
 
@@ -80,8 +82,8 @@ export class MakeABookingPage implements OnInit {
       preference: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      mobile: ['', [ Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]+$')]],
-      email: ['', [Validators.required, Validators.email]]
+      mobile: ['', [ Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.0]+.[a-zA-Z]{2,4}$')]]
     });
   }
 
@@ -116,6 +118,8 @@ export class MakeABookingPage implements OnInit {
     ],
     mobile: [
       { type: 'required', message: 'Mobile number is required.' },
+      { type: 'pattern', message: 'Mobile number cannot be less than 10 digits.' },
+      { type: 'pattern', message: 'Mobile number cannot be more than 10 digits.' },
       { type: 'pattern', message: 'Only numerical values allowed.' }
     ]
   }
@@ -149,6 +153,7 @@ export class MakeABookingPage implements OnInit {
               this.restaurantService.booking().doc(this.id).collection('bookings').add({
                 userId: this.userId,
                 ownerId: this.uid,
+                resName: this.resName,
                 date: this.bookingForm.value.date,
                 time: this.bookingForm.value.time,
                 guests: this.bookingForm.value.guests,
@@ -157,6 +162,7 @@ export class MakeABookingPage implements OnInit {
                 lastName: this.bookingForm.value.lastName,
                 mobile: this.bookingForm.value.mobile,
                 email: this.bookingForm.value.email,
+                createdAt: new Date(),
                 status: 'Pending'
               }).then(() => {
                 this.nav.navigateRoot('/reviews/' + this.ownerId);
@@ -172,56 +178,6 @@ export class MakeABookingPage implements OnInit {
       ],
     });
     return await alert.present();
-
-    // var user = firebase.auth().currentUser;
-    // this.userId = user.uid;
-    // console.log('userId: ', this.userId)
-
-    // this.ownerId = this.uid
-
-    // this.restaurantService.booking().doc(this.uid).collection('bookings').add({
-    //   userId: this.userId,
-    //   ownerId: this.uid,
-    //   date: this.bookingForm.value.date,
-    //   time: this.bookingForm.value.time,
-    //   guests: this.bookingForm.value.guests,
-    //   preference: this.bookingForm.value.preference,
-    //   firstName: this.bookingForm.value.firstName,
-    //   lastName: this.bookingForm.value.lastName,
-    //   mobile: this.bookingForm.value.mobile,
-    //   email: this.bookingForm.value.email
-    // }).then(() => {
-    //   loading.dismiss().then(() => {
-    //     this.nav.navigateRoot('/reviews/' + this.ownerId);
-    //   });
-    // }, error => {
-    //   loading.dismiss().then(() => {
-    //     console.error(error);
-    //   });
-    // }
-    // );
-    // return await loading.present();
-
-
-
-    // this.restaurantService.booking().doc(this.uid).collection('bookings').add({
-    //   userId: this.userId,
-    //   ownerId: this.uid,
-    //   date: this.bookingForm.value.date,
-    //   time: this.bookingForm.value.time,
-    //   guests: this.bookingForm.value.guests,
-    //   preference: this.bookingForm.value.preference,
-    //   firstName: this.bookingForm.value.firstName,
-    //   lastName: this.bookingForm.value.lastName,
-    //   mobile: this.bookingForm.value.mobile,
-    //   email: this.bookingForm.value.email
-    // }).then(function(docRef){
-    //   console.log("Document booking: ", docRef);
-    // }).catch(function(error){
-    //   console.log(error);
-    // });
-    // this.nav.navigateRoot('/reviews/'+this.ownerId)
-    // this.bookingForm.reset();
   }
 
 

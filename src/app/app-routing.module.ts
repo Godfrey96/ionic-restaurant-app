@@ -54,7 +54,7 @@ const routes: Routes = [
   {
     path: 'reviews/:id',
     loadChildren: () => import('./pages/reviews/reviews.module').then( m => m.ReviewsPageModule)
-  },
+  }
 ];
 
 @NgModule({

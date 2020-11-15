@@ -15,8 +15,25 @@
       <h2 style=" margin-bottom: 10px;"><b>View Bookings</b></h2>
     </div> -->
 
+    <!-- <ion-list>
+      <ion-item button *ngFor="let book of booking" (click)="openModal(book)">
+        <ion-label>
+          <h6><b>{{book?.resName}}</b>'s Restaurant</h6>
+          <p *ngIf="book.status == 'Pending'">Your booking is still {{book.status}}</p> 
+        <p *ngIf="book.status == 'Cancelled'">Your booking has been {{book.status}}</p> 
+        <p *ngIf="book.status == 'Approved'">Your booking has been {{book.status}}</p>
+        <p></p>
+        <p (click)="statuses(book.ownerId, book.uid, 'Pending')"></p>
+        <ion-button (click)="statuses(book.ownerId, book.uid, 'Cancelled')" color="danger" size="small">Cancel</ion-button>
+        </ion-label>
+        
+      </ion-item>
+    </ion-list> -->
+
     <ion-card *ngFor="let book of booking">
-      <ion-card-title style="margin-left: 18px;"></ion-card-title>
+      <ion-card-title style="margin-left: 18px; font-size: small;">
+        <b>{{book?.resName}}</b>'s Restaurant - <b style="font-size: 9px;">{{book?.createdAt.toDate() | date}} - {{book?.createdAt.toDate() | date: 'H:mm'}}</b>
+      </ion-card-title>
       <ion-card-content>
       
         <ion-grid>
@@ -28,29 +45,22 @@
         </ion-grid>
 
         <ion-row>
-          <ion-col size="8">
-            <!-- <p>Restaurant Name: {{book?.resName}}</p> -->
-            <p>Guests: {{book.guests}} </p>
-            <p>Seating Preference: {{book.preference}}</p>
-            <p>Date: {{book.date | date}}</p>
-            <!-- <p>Status: {{book.status}}</p> -->
-            <p *ngIf="book.status == 'Pending'">Status: {{book.status}}</p> 
-            <p *ngIf="book.status == 'Declined'">Status: {{book.status}}</p> 
-            <p *ngIf="book.status == 'Approved'">Status: {{book.status}}</p> 
+          <ion-col size="12">
+            <p style="font-size: x-small; font-weight: bold;">Guests: {{book.guests}} </p>
+            <p style="font-size: x-small; font-weight: bold;">Seating Preference: {{book.preference}}</p>
+            <p style="font-size: x-small; font-weight: bold;">Date: {{book.date | date}}</p>
+            <p style="font-size: x-small; font-weight: bold;">Time: {{book.time | date: 'H:mm'}}</p>
+            <p *ngIf="book.status == 'Pending'" style="font-size: x-small; font-weight: bold;">Your booking is still {{book.status}}</p> 
+            <p *ngIf="book.status == 'Cancelled'" style="font-size: x-small; font-weight: bold;">Your booking has been {{book.status}}</p> 
+            <p *ngIf="book.status == 'Approved'" style="font-size: x-small; font-weight: bold;">Your booking has been {{book.status}}</p> 
             <p></p>
-          </ion-col>
-          <ion-col size="4">
-
-            <p (click)="status(book.ownerId, book.uid, 'Pending')"></p>
-            <!-- <ion-button (click)="status(book.ownerId, book.uid, 'Approved')" color="success" size="small" shape="round" name="selected">Confirm</ion-button> -->
-            <!-- <ion-button (click)="status(book.ownerId, book.uid, 'Declined')" color="danger" size="small" shape="round">Decline</ion-button> -->
-            <!-- <ion-button (click)="status(book.ownerId, book.uid, 'Declined')" color="danger" size="small" shape="round">Decline</ion-button> -->
-
-            <!-- <ion-button color="success" size="small" shape="round">Edit</ion-button>
-            <ion-button color="danger" size="small" shape="round" (click)="deleteBooking()">Cancel</ion-button> -->
-            <!-- <ion-button color="danger" size="small" shape="round">Decline</ion-button> -->
+            <p (click)="statuses(book.ownerId, book.uid, 'Pending')"></p>
+            <ion-button style="text-transform: capitalize;" (click)="statuses(book.ownerId, book.uid, 'Cancelled')" color="danger" size="small">
+              Cancel
+            </ion-button> 
           </ion-col>
         </ion-row>
+
       </ion-card-content>
     </ion-card>
 

@@ -1,9 +1,11 @@
+import { UserModalComponent } from './../user-modal/user-modal.component';
 import { RestaurantsService } from './../../services/restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore'
+import { ModalController, LoadingController, NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-booking',
@@ -16,63 +18,83 @@ export class UserBookingPage implements OnInit {
   id: any;
   ownerId: any
   userId: any;
+  user_Id: any;
   resName: any
+
+  spin: boolean = false;
 
   booking: Array<any> = [];
   restaurants: any
 
   constructor(
               private activatedActivated: ActivatedRoute, 
-              private router: Router, 
-              private restaurantService: RestaurantsService
+              private restaurantService: RestaurantsService,
+              private modalCtrl: ModalController,
+              public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController,
+              public nav: NavController,
     ) { }
 
   ngOnInit() {
-
-    // this.id = this.activatedActivated.snapshot.paramMap.get('id')
-    // console.log('ID: ', this.id)
-    // //console.log(this.uid)
-
-    // // fetching single restaurant
-    // firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
-    //   this.restaurants = snapshot.data();
-    //   console.log('new data: ', this.restaurants)
-    //   this.resName = snapshot.get('resName');
-    //   console.log('resName: ', this.resName)
-    // });
 
     this.restaurantService.signAuth();
     let user = firebase.auth().currentUser;
     this.userId = user.uid;
     console.log('user id Booked: ', user)
 
-    const userBookings = firebase.firestore().collectionGroup('bookings').where('userId', '==', this.userId).orderBy('date', 'desc');
+    const userBookings = firebase.firestore().collectionGroup('bookings').where('userId', '==', this.userId).orderBy('createdAt', 'desc');
     userBookings.get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
-        this.booking.push(doc.data())
-        console.info('doc-id: ', doc.id, '=>', 'doc-data: ', doc.data());
-        console.log('userBookings: ', this.booking)
+        this.booking.push(Object.assign( doc.data(), {uid:doc.id}) )
+        this.user_Id = {uid:doc.id}
+        console.log('user_idd: ', this.user_Id)
+        // console.info('doc-id: ', {uid:doc.id}, '=>', 'doc-data: ', doc.data());
+        // console.log('userBookings: ', this.booking)
       })
     })
 
   }
 
-  status(ownerId, userId, status){
-    this.restaurantService.bookingStatus(ownerId, userId, status);
-  }
+  async statuses(ownerId, userId, status){
 
-  deleteBooking(){
+    const alert = await this.alertCtrl.create({
 
-     // delete subcollection 
-    firebase.firestore().collection("restaurants").doc(this.id).collection('bookings').doc(this.userId).delete().then(function() {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
+      message: `Are you sure you want to cancel your booking?.`,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: blah => {
+            console.log('Confirm No: ', blah);
+          },
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.restaurantService.bookingStatus(ownerId, userId, status);
+          }
+        }
+      ]
+
     });
+    return await alert.present();
+
+    // this.restaurantService.bookingStatus(ownerId, userId, status);
   }
 
-  
-
-  
+  async openModal(book){
+    const modal = await this.modalCtrl.create({
+      component: UserModalComponent,
+      componentProps: { 
+        resName: book.resName, 
+        guests: book.guests, 
+        preference: book.preference, 
+        date: book.date, 
+        time: book.time,
+        status: book.status
+      }
+    });
+    await modal.present();
+  }
 
 }

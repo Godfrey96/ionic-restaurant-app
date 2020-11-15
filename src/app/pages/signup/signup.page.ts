@@ -1,6 +1,6 @@
 import { RestaurantsService } from './../../services/restaurants.service';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController } from '@ionic/angular';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
@@ -19,6 +19,7 @@ export class SignupPage implements OnInit {
   spin: boolean = false;
 
   constructor(
+              public loadingCtrl: LoadingController,
               public nav: NavController,
               private fb: FormBuilder,
               private restaurantService: RestaurantsService
@@ -32,8 +33,7 @@ export class SignupPage implements OnInit {
     this.completeForm = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-     // mobile: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -49,14 +49,6 @@ export class SignupPage implements OnInit {
     return this.completeForm.get("email");
   }
 
-  // get mobile() {
-  //   return this.ownerForm.get("mobile");
-  // }
-
-  // get password() {
-  //   return this.ownerForm.get("password");
-  // }
-
   public errorMessages = {
     name: [
       { type: 'required', message: 'first name is required' },
@@ -70,20 +62,15 @@ export class SignupPage implements OnInit {
       { type: 'required', message: 'Email is required' },
       { type: 'pattern', message: 'Please provide valid email.' }
     ]
-    // mobile: [
-    //   { type: 'required', message: 'Mobile number is required.' },
-    //   { type: 'pattern', message: 'Only numerical values allowed.' }
-    // ],
-    // password: [
-    //   { type: 'required', message: 'Password is required.' }
-    // ]
   }
 
 
 
-  completeSignup(){
-    const user = firebase.auth().currentUser
+  async completeSignup(){
 
+    const loading = await this.loadingCtrl.create();
+
+    const user = firebase.auth().currentUser
     this.userId = user.uid
 
     this.restaurantService.registerUser().doc(this.userId).set({
@@ -92,14 +79,19 @@ export class SignupPage implements OnInit {
       lastName: this.completeForm.value.lastName,
       email: this.completeForm.value.email,
       //mobile: this.completeForm.value.mobile
-    }).then(function(docRef){
-      console.log("Document written data: ", docRef);
-    }).catch(function(error){
-      console.log(error);
-    });
-    this.nav.navigateRoot('/landing-page');
-    this.completeForm.reset();
-
+    }).then(() => {
+      loading.dismiss().then(() => {
+        this.nav.navigateRoot('/landing-page');
+        this.completeForm.reset();
+      })
+    },
+    error => {
+      loading.dismiss().then(() => {
+        console.log(error);
+      });
+    }
+    );
+    
     var name = (<HTMLInputElement>document.getElementById("name")).value;
 
     this.spin = true;
@@ -112,22 +104,10 @@ export class SignupPage implements OnInit {
       console.log('disp: ', name)
       this.nav.navigateRoot('/landing-page')
     })
+
+
+    return await loading.present();
   }
-
-  // completeSignup(){
-    // const firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
-    // const lastName = (<HTMLInputElement>document.getElementById("lastName")).value;
-    // const email = (<HTMLInputElement>document.getElementById("email")).value;
-    // const mobile = (<HTMLInputElement>document.getElementById("mobile")).value;
-  //   this.spin = true;
-
-  //   const user = firebase.auth().currentUser;
-  //   user.updateProfile({
-  //     displayName: firstName,
-  //   }).then(() => {
-  //     localStorage.setItem("firstName", firstName);
-  //     this.nav.navigateRoot('/landing-page')
-  //   })
-  // }
+  
 
 }

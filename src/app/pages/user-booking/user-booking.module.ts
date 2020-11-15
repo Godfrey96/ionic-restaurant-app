@@ -1,3 +1,4 @@
+import { UserModalComponent } from './../user-modal/user-modal.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { UserBookingPage } from './user-booking.page';
     IonicModule,
     UserBookingPageRoutingModule
   ],
-  declarations: [UserBookingPage]
+  declarations: [UserBookingPage, UserModalComponent],
+  entryComponents:[UserModalComponent]
 })
 export class UserBookingPageModule {}

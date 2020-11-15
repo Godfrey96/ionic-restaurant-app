@@ -83,8 +83,27 @@
         </ion-col>
       </ion-row>
     </ion-grid> -->
-  
+
     <ion-grid>
+      <h3 style="font-weight: bold;">Menu</h3>
+      <ion-row>
+        <ion-col size="12">
+          <ion-list *ngFor="let menu of arrayMenus">
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <ion-img [src]="menu.imgUrl"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                <p style="font-size: x-small;">{{menu.description}}</p>
+                <p style="font-weight: bold; font-size: small; color: #000000;">{{menu.price | currency: 'ZAR '}}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <!-- <ion-grid>
       <h3 style="font-weight: bold;">Menu</h3>
       <ion-row>
         <ion-col size="4" *ngFor="let menu of arrayMenus">
@@ -97,7 +116,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
   
     <ion-grid>
       <ion-row>
@@ -120,7 +139,7 @@
               <ion-label>
                 <h2><b>{{rev.name}}</b></h2>
                 <!-- <h3 >Stars</h3> -->
-                <p>{{rev.review}}</p>
+                <p style="font-size: x-small;">{{rev.review}}</p>
               </ion-label>
             </ion-item>
           </ion-list>

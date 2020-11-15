@@ -5,3 +5,16 @@
     margin-left: 18px;
     margin-right: 20px;
   }
+
+  .line{
+    border-bottom: 1px solid grey;
+    margin-top: -120px;
+    padding-left: 100px;
+    //margin-right: 60px;
+}
+
+.ion-card-title{
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+}
