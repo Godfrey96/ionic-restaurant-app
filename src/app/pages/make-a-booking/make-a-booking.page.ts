@@ -106,11 +106,11 @@ export class MakeABookingPage implements OnInit {
   public errorMessages = {
     firstName: [
       { type: 'required', message: 'First name is required' },
-      { type: 'maxLength', message: 'First name cannot be longer than 100 characters' }
+      { type: 'maxlength', message: 'First name cannot be longer than 100 characters' }
     ],
     lastName: [
       { type: 'required', message: 'Last name is required' },
-      { type: 'maxLength', message: 'Last name cannot be longer than 100 characters' }
+      { type: 'maxlength', message: 'Last name cannot be longer than 100 characters' }
     ],
     email: [
       { type: 'required', message: 'Email is required' },
@@ -118,8 +118,8 @@ export class MakeABookingPage implements OnInit {
     ],
     mobile: [
       { type: 'required', message: 'Mobile number is required.' },
-      { type: 'pattern', message: 'Mobile number cannot be less than 10 digits.' },
-      { type: 'pattern', message: 'Mobile number cannot be more than 10 digits.' },
+      { type: 'minlength', message: 'Mobile number cannot be less than 10 digits.' },
+      { type: 'maxlength', message: 'Mobile number cannot be more than 10 digits.' },
       { type: 'pattern', message: 'Only numerical values allowed.' }
     ]
   }
