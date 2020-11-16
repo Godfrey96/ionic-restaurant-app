@@ -48,7 +48,7 @@ export class UserBookingPage implements OnInit {
         this.booking.push(Object.assign( doc.data(), {uid:doc.id}) )
         this.user_Id = {uid:doc.id}
         console.log('user_idd: ', this.user_Id)
-        // console.info('doc-id: ', {uid:doc.id}, '=>', 'doc-data: ', doc.data());
+        // console.log('doc-id: ', {uid:doc.id}, '=>', 'doc-data: ', doc.data());
         // console.log('userBookings: ', this.booking)
       })
     })
@@ -79,7 +79,6 @@ export class UserBookingPage implements OnInit {
     });
     return await alert.present();
 
-    // this.restaurantService.bookingStatus(ownerId, userId, status);
   }
 
   async openModal(book){

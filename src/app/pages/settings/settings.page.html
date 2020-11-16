@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="landing-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="cont-1" style="margin-top: 50px;">
+    <ion-grid>
+      <ion-item button>
+        <ion-icon name="notifications" style="margin-right: 8px;"></ion-icon>
+        Notifications
+      </ion-item>
+
+      <ion-item button routerLink="user-booking">
+        <ion-icon name="language" style="margin-right: 8px;"></ion-icon>
+        Language
+      </ion-item>
+
+      <ion-item routerLink="/settings">
+        <ion-icon button name="business" style="margin-right: 8px;"></ion-icon>
+        About Us
+      </ion-item>
+
+      <ion-item>
+        <ion-icon button name="lock-closed" style="margin-right: 8px;"></ion-icon>
+        Privacy Policy
+      </ion-item>
+
+      <ion-item (click)="logout()">
+        <ion-icon name="log-out" style="margin-right: 8px;"></ion-icon>
+        Logout
+      </ion-item>
+    </ion-grid>
+  </div>
+
+
+</ion-content>

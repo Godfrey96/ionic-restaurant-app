@@ -18,7 +18,7 @@ export class MakeABookingPage implements OnInit {
 
   public minDate = moment().format();
   public maxDate = moment().add(5, 'y').format('YYYY');
-  myDate = moment().toDate();
+  myDate = moment().toDate(); 
 
   minTime = '06:30';
   maxTime = '19:30';
