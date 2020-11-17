@@ -1,4 +1,12 @@
+ion-toolbar{
+    --overflow: hidden;
+    color: whitesmoke;
+    --background: #50A581;
+}
 
+ion-searchbar{
+    --border-radius: 50px;
+}
 
 .nearby{
     display: flex;
