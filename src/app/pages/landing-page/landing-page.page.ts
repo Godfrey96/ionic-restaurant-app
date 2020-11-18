@@ -31,6 +31,7 @@ export class LandingPagePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    //fetching all restaurants
     firebase.firestore().collection('restaurants').onSnapshot(res => {
       res.forEach(element => {
         this.restaurants.push(element.data());

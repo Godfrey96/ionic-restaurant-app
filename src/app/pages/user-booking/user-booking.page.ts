@@ -2,6 +2,7 @@ import { UserModalComponent } from './../user-modal/user-modal.component';
 import { RestaurantsService } from './../../services/restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore'
@@ -20,6 +21,7 @@ export class UserBookingPage implements OnInit {
   userId: any;
   user_Id: any;
   resName: any
+  disableButton: boolean = false;
 
   spin: boolean = false;
 
@@ -72,6 +74,7 @@ export class UserBookingPage implements OnInit {
           text: 'Yes',
           handler: () => {
             this.restaurantService.bookingStatus(ownerId, userId, status);
+            this.disableButton = true;
           }
         }
       ]
@@ -94,6 +97,11 @@ export class UserBookingPage implements OnInit {
       }
     });
     await modal.present();
+  }
+
+  ago(time){
+    let difference = moment(time).diff(moment())
+    return moment.duration(difference).humanize();
   }
 
 }

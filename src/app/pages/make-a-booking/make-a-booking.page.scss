@@ -5,6 +5,12 @@ ion-content{
     // justify-content: center;
 }
 
+ion-toolbar{
+  --overflow: hidden;
+  color: whitesmoke;
+  --background: #50A581;
+}
+
 .line{
     border-bottom: 1px solid grey;
     margin-bottom: 16px;

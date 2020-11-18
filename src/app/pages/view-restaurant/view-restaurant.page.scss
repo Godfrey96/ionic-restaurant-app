@@ -5,6 +5,12 @@ ion-content{
     // justify-content: center;
 }
 
+ion-toolbar{
+    --overflow: hidden;
+    color: whitesmoke;
+    --background: #50A581;
+}
+
 // .content{
 //     display: flex;
 //     flex-direction: column;

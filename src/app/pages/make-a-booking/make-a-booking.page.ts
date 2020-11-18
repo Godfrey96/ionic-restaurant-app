@@ -162,7 +162,8 @@ export class MakeABookingPage implements OnInit {
                 lastName: this.bookingForm.value.lastName,
                 mobile: this.bookingForm.value.mobile,
                 email: this.bookingForm.value.email,
-                createdAt: new Date(),
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                // createdAt: new Date(),
                 status: 'Pending'
               }).then(() => {
                 this.nav.navigateRoot('/reviews/' + this.ownerId);
