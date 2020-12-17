@@ -19,6 +19,9 @@ export class PhoneScreenPage implements OnInit {
   otpSent: boolean = false; //OTP sent status
   phoneNumber: string; //set value after OTP is sent
 
+  userP: any;
+  firstName: any;
+
   recaptchaVerifier: firebase.auth.RecaptchaVerifier;
   confirmationResult: firebase.auth.ConfirmationResult;
 
@@ -40,7 +43,7 @@ export class PhoneScreenPage implements OnInit {
   //     'size': 'invisiable'
   //   });
   // }
-  
+
 
   ngOnInit() {
     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
@@ -72,25 +75,37 @@ export class PhoneScreenPage implements OnInit {
     this.spin = true;
 
     this.confirmationResult.confirm(otp).then((data) => {
+
+      let user = firebase.auth().currentUser.uid
+      console.log('User', user);
+
+      firebase.firestore().collection('users').doc(user).get().then((snapshot) => {
+        this.userP = snapshot.data();
+        console.log('user profile: ', this.userP);
+        this.firstName = snapshot.get('firstName');
+        console.log('hahah FIRST NAME: ', this.firstName);
+
+        // Checking if the first name is available before logging in
+        if (this.firstName) {
+          console.log(' IF FIRST NAME: ', this.firstName);
+          this.nav.navigateRoot("/tabs/landing-page");
+        } else {
+          console.log('Else User FIRST NAME: ', this.firstName);
+          this.nav.navigateRoot("/signup");
+        }
+      })
+
       this.spin = false;
       //Save user uid to localStorage
       localStorage.setItem("uid", data.user.uid);
       //Save phoneNumber to localStorage
       localStorage.setItem("phoneNumber", data.user.phoneNumber);
-
-      //If user has name
-      //Navigate to home page
-      if (data.user.displayName) {
-        this.nav.navigateRoot("/landing-page");
-      }
-      //navigate to profile setup page
-      else {
-        this.nav.navigateRoot("/signup");
-      }
+      
     }).catch(err => {
       alert(err);
       this.spin = false;
     })
   }
-
 }
+
+

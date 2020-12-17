@@ -23,9 +23,11 @@ export class ReviewsPage implements OnInit {
   restaurants: Array<any> = [];
   restaurant: any
   profile: any
-  name: any
+  firstName: any
+  lastName: any
   rests: any
   resName: any
+  reviewId: any;
 
   constructor(
             public loadingCtrl: LoadingController,
@@ -70,8 +72,9 @@ export class ReviewsPage implements OnInit {
     firebase.firestore().collection('users').doc(user).get().then(snapshot => {
       this.profile = snapshot.data();
       console.log('new data: ', this.profile)
-      this.name = snapshot.get('name')
-      console.log('name: ', this.name)
+      this.firstName = snapshot.get('firstName')
+      this.lastName = snapshot.get('lastName')
+      console.log('name: ', this.firstName)
     })
     
   }
@@ -103,16 +106,17 @@ export class ReviewsPage implements OnInit {
             console.log('Owner Id: ', this.ownerId)
 
             firebase.firestore().collection('restaurants').doc(this.id).collection('reviews').add({
-                ownerId: this.id,
+                restId: this.id,
                 userId: this.userId,
-                name: this.name,
+                firstName: this.firstName,
+                lastName: this.lastName,
                 review: this.reviewForm.value.review,
                 createdAt: new Date()
-            }).then(() => {
-              // this.nav.navigateRoot('/user-booking/'+this.ownerId)
+            }).then((doc) => {
+              doc.set({ reviewId: doc.id }, { merge: true }).then(() => {
+                console.log('REVIEW ID: ', this.reviewId)
+              })
               this.nav.navigateRoot('/user-booking')
-              // this.router.navigate(['/user-booking', this.id])
-              // this.nav.navigateRoot('/user-booking/'+this.userId)
               this.reviewForm.reset();
             }).catch(function (error) {
               console.log(error)

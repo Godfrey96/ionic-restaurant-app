@@ -11,48 +11,51 @@
 
   <div class="content">
 
-    <!-- Profile Info -->
-    <ion-item lines="none">
-      <ion-thumbnail slot="start">
-        <img style="border-radius: 100%;" src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{profile?.name}} {{profile?.lastName}}</h2>
-        <p>{{phoneNumber}}</p>
-      </ion-label>
-    </ion-item>
+    <!-- <div class="imgage">
+      <img style="width: 90%; height: 150px; margin-left: 18px; margin-top: 10px;" src="" alt="">
+    </div>
+    <div class="editRes">
+      <ion-button size="small">Edit Profile</ion-button>
+    </div> -->
 
-    <ion-grid>
-      <ion-row>
-        <ion-col class="line">
-          
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- <div class="cont-1" style="margin-top: 50px;">
+    <div class="cont-1">
       <ion-grid >
+
         <ion-item>
-          <ion-icon name="book" style="margin-right: 8px;"></ion-icon>
-          My Bookings
+      
         </ion-item>
 
         <ion-item>
-          <ion-icon name="key" style="margin-right: 8px;"></ion-icon>
-          Account
-        </ion-item>
-
-        <ion-item>
-          <ion-icon name="home" style="margin-right: 8px;"></ion-icon>
-          My Address
+          <p style="font-size: 12px;">First name: 
+            {{profile?.firstName}}
+          </p>
         </ion-item>
   
         <ion-item>
-          <ion-icon name="log-out" style="margin-right: 8px;"></ion-icon>
-          Logout 
+          <p style="font-size: 12px;">Last name:
+            {{profile?.lastName}}
+          </p>
+        </ion-item>
+  
+        <ion-item>
+          <p style="font-size: 12px;">Phone:
+            {{profile?.phoneNumber}}
+          </p>
+        </ion-item>
+  
+        <ion-item>
+          <p style="font-size: 12px;">Email:
+            {{profile?.email}}
+          </p>
+        </ion-item>
+  
+        <ion-item>
+          <p style="font-size: 12px;">Date of Birth:
+            {{profile?.DoB }}
+          </p>    
         </ion-item>
       </ion-grid>
-    </div> -->
+    </div>
 
   </div>
 

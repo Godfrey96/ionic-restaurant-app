@@ -31,10 +31,10 @@ const routes: Routes = [
     path: 'phone-screen',
     loadChildren: () => import('./pages/phone-screen/phone-screen.module').then( m => m.PhoneScreenPageModule)
   },
-  {
-    path: 'landing-page',
-    loadChildren: () => import('./pages/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
-  },
+  // {
+  //   path: 'landing-page',
+  //   loadChildren: () => import('./pages/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+  // },
   {
     path: 'view-restaurant/:id',
     loadChildren: () => import('./pages/view-restaurant/view-restaurant.module').then( m => m.ViewRestaurantPageModule)
@@ -58,7 +58,23 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
-  }
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+  // {
+  //   path: 'search',
+  //   loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
+  // },
+  // {
+  //   path: 'favorites',
+  //   loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
+  // },
+  // {
+  //   path: 'user-profile',
+  //   loadChildren: () => import('./pages/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
+  // }
 ];
 
 @NgModule({

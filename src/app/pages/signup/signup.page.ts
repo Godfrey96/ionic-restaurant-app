@@ -5,6 +5,8 @@ import { AlertController, NavController, LoadingController } from '@ionic/angula
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +17,7 @@ export class SignupPage implements OnInit {
 
   completeForm: FormGroup;
   userId: any;
+  phoneNumber: string;
 
   spin: boolean = false;
 
@@ -23,7 +26,9 @@ export class SignupPage implements OnInit {
               public nav: NavController,
               private fb: FormBuilder,
               private restaurantService: RestaurantsService
-              ) { }
+              ) { 
+                this.phoneNumber = localStorage.getItem("phoneNumber");
+              }
 
   ngOnInit() {
     this.restaurantService.signAuth();
@@ -31,38 +36,39 @@ export class SignupPage implements OnInit {
   }
   completeSetup(){
     this.completeForm = this.fb.group({
-      name: ['', Validators.required],
+      firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      DoB: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.0]+.[a-zA-Z]{2,4}$')]]
     });
   }
 
-  get name() {
-    return this.completeForm.get("name");
-  }
+  // get name() {
+  //   return this.completeForm.get("name");
+  // }
 
-  get lastName() {
-    return this.completeForm.get("lastName");
-  }
+  // get lastName() {
+  //   return this.completeForm.get("lastName");
+  // }
 
-  get email() {
-    return this.completeForm.get("email");
-  }
+  // get email() {
+  //   return this.completeForm.get("email");
+  // }
 
-  public errorMessages = {
-    name: [
-      { type: 'required', message: 'first name is required' },
-      { type: 'maxLength', message: 'first name cannot be longer than 100 characters' }
-    ],
-    lastName: [
-      { type: 'required', message: 'Last name is required' },
-      { type: 'maxLength', message: 'Last name cannot be longer than 100 characters' }
-    ],
-    email: [
-      { type: 'required', message: 'Email is required' },
-      { type: 'pattern', message: 'Please provide valid email.' }
-    ]
-  }
+  // public errorMessages = {
+  //   name: [
+  //     { type: 'required', message: 'first name is required' },
+  //     { type: 'maxLength', message: 'first name cannot be longer than 100 characters' }
+  //   ],
+  //   lastName: [
+  //     { type: 'required', message: 'Last name is required' },
+  //     { type: 'maxLength', message: 'Last name cannot be longer than 100 characters' }
+  //   ],
+  //   email: [
+  //     { type: 'required', message: 'Email is required' },
+  //     { type: 'pattern', message: 'Please provide valid email.' }
+  //   ]
+  // }
 
 
 
@@ -73,41 +79,26 @@ export class SignupPage implements OnInit {
     const user = firebase.auth().currentUser
     this.userId = user.uid
 
-    this.restaurantService.registerUser().doc(this.userId).set({
+    firebase.firestore().collection('users').doc(this.userId).set({
       userId: this.userId,
-      name: this.completeForm.value.name,
+      phoneNumber: this.phoneNumber,
+      firstName: this.completeForm.value.firstName,
       lastName: this.completeForm.value.lastName,
-      email: this.completeForm.value.email,
-      //mobile: this.completeForm.value.mobile
+      DoB: this.completeForm.value.DoB,
+      email: this.completeForm.value.email
     }).then(() => {
       loading.dismiss().then(() => {
-        this.nav.navigateRoot('/landing-page');
+        this.nav.navigateRoot('/tabs/landing-page');
         this.completeForm.reset();
       })
     },
     error => {
       loading.dismiss().then(() => {
         console.log(error);
-      });
+      })
     }
     );
-    
-    var name = (<HTMLInputElement>document.getElementById("name")).value;
-
-    this.spin = true;
-
-    // const user = firebase.auth().currentUser;
-    user.updateProfile({
-      displayName: name,
-    }).then(() => {
-      localStorage.setItem("Display Name: ", name);
-      console.log('disp: ', name)
-      this.nav.navigateRoot('/landing-page')
-    })
-
-
     return await loading.present();
   }
   
-
 }

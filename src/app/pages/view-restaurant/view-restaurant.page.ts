@@ -1,7 +1,7 @@
 import { RestaurantsService } from './../../services/restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController,LoadingController, AlertController  } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -19,15 +19,14 @@ export class ViewRestaurantPage implements OnInit {
   id: any;
   name: any;
   array: any = []
-  arrayMenus: any = []
-  arrayReviews: any = []
+  arrayMenus: Array<any> = [];
+  arrayReviews: Array<any> = [];
   restaurants: any = [];
   profile: any
-  //menu: any;
-
-  // name: string;
-  phoneNumber: string;
-  dp: string;
+  restArrays: Array<any> = [];
+  restId: any;
+  firstName: any;
+  lastName: any;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -36,18 +35,12 @@ export class ViewRestaurantPage implements OnInit {
     private activatedActivated: ActivatedRoute,
     private restaurantService: RestaurantsService
     // public navParams: NavParams
-  ) {
-    this.name = localStorage.getItem("name");
-    this.phoneNumber = localStorage.getItem("phoneNumber");
-    this.dp = "https://ui-avatars.com/api/?background=ff7f50" + "&color=ffffff&size=128&bold=true&name=" + this.name;
-    console.log('username: ', name)
-  }
+  ) { }
 
   ngOnInit() {
 
     this.id = this.activatedActivated.snapshot.paramMap.get('id')
     console.log('ID: ', this.id)
-    //console.log(this.uid)
 
     // fetching single restaurant
     firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
@@ -55,27 +48,34 @@ export class ViewRestaurantPage implements OnInit {
       console.log('new data: ', this.restaurants)
     });
 
-    // Fetching menus
-    firebase.firestore().collection('restaurants').doc(this.uid).collection('menu').where('ownerId', '==', this.uid).limit(3).get().then(snapshot => {
-      snapshot.docs.forEach(menu => {
-        this.arrayMenus.push(menu.data())
-        console.log('menu: ', this.arrayMenus)
+    // fetching all restaurants
+    firebase.firestore().collection('restaurants').onSnapshot(res => {
+      res.forEach(element => {
+        this.restArrays.push(Object.assign(element.data(), { uid: element.id }));
+        this.restId = { uid: element.id }.uid
 
-      })
-    })
+        // Fetching menus
+        firebase.firestore().collection('restaurants').doc(this.restId).collection('menu').limit(3).onSnapshot(res => {
+          res.forEach(doc => {
+            this.arrayMenus.push(doc.data())
+          })
+        })
 
-    // Fetching reviews
-    firebase.firestore().collection('restaurants').doc(this.uid).collection('reviews').where('ownerId', '==', this.uid).orderBy('createdAt', 'desc').limit(4).get().then(snapshot => {
-      snapshot.docs.forEach(review => {
-        this.arrayReviews.push(review.data());
-        console.log('reviews new data: ', this.arrayReviews)
-      })
+        // Fetching reviews
+        firebase.firestore().collection('restaurants').doc(this.restId).collection('reviews').limit(3).onSnapshot(res => {
+          res.forEach(doc => {
+            this.arrayReviews.push(doc.data());
+            this.firstName = doc.get('firstName');
+            this.lastName = doc.get('lastName');
+            
+          })
+        })
+      });
     });
 
     let user = firebase.auth().currentUser.uid
-    console.log('User: ', user)
 
-    //Fetching users
+    //Fetching user
     firebase.firestore().collection('users').doc(user).get().then(snapshot => {
       this.profile = snapshot.data();
       console.log('new profile: ', this.profile)
@@ -89,7 +89,7 @@ export class ViewRestaurantPage implements OnInit {
     const loading = await this.loadingCtrl.create();
 
     this.nav.navigateRoot('/make-a-booking')
-    
+
     return await loading.present();
   }
 

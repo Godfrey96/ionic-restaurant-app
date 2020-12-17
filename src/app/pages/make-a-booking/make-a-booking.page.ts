@@ -28,6 +28,7 @@ export class MakeABookingPage implements OnInit {
   id: any;
   ownerId: any
   userId: any;
+  restId: any;
   array: any = []
 
   resName: any;
@@ -40,6 +41,7 @@ export class MakeABookingPage implements OnInit {
   spin: boolean = false;
 
   restaurants: any = [];
+  bookId: any;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -152,7 +154,7 @@ export class MakeABookingPage implements OnInit {
             // if(this.bookingForm.valid){
               this.restaurantService.booking().doc(this.id).collection('bookings').add({
                 userId: this.userId,
-                ownerId: this.uid,
+                restId: this.id,
                 resName: this.resName,
                 date: this.bookingForm.value.date,
                 time: this.bookingForm.value.time,
@@ -163,10 +165,12 @@ export class MakeABookingPage implements OnInit {
                 mobile: this.bookingForm.value.mobile,
                 email: this.bookingForm.value.email,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                // createdAt: new Date(),
                 status: 'Pending'
-              }).then(() => {
-                this.nav.navigateRoot('/reviews/' + this.ownerId);
+              }).then((doc) => {
+                doc.set({ bookId: doc.id }, { merge: true }).then(() => {
+                  console.log('BOOKING ID: ', this.bookId)
+                })
+                this.nav.navigateRoot('/reviews/' + this.id);
                 this.bookingForm.reset();
               }).catch(function (error) {
                 console.log(error)

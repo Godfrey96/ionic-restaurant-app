@@ -4,11 +4,11 @@ import firebase from 'firebase/app';
 import 'firebase/firestore'
 
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.page.html',
-  styleUrls: ['./landing-page.page.scss'],
+  selector: 'app-search',
+  templateUrl: './search.page.html',
+  styleUrls: ['./search.page.scss'],
 })
-export class LandingPagePage implements OnInit {
+export class SearchPage implements OnInit {
 
   restaurants: Array<any> = [];
   loadedRestaurants: Array<any> = [];
@@ -20,7 +20,6 @@ export class LandingPagePage implements OnInit {
     autoplay: true,
     speed: 1000
   };
-
 
   constructor() { }
 

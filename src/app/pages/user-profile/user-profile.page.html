@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/landing-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div class="content" style="margin-top: 50px;">
+
+    <!-- Profile Info -->
+  <ion-item lines="none">
+    <ion-thumbnail slot="start">
+      <img style="border-radius: 100%;" src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" />
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{profile?.firstName}} {{profile?.lastName}}</h2>
+      <!-- <p>{{profile?.phoneNumber}}</p> -->
+    </ion-label>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="line">
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    <ion-grid>
+      <ion-item routerLink="/profile">
+        <ion-icon name="person" size="medium" style="margin-right: 8px;"></ion-icon>
+        Profile
+      </ion-item>
+
+      <ion-item routerLink="/user-booking">
+        <ion-icon name="book" size="medium" style="margin-right: 8px;"></ion-icon>
+        My Bookings
+      </ion-item>
+
+      <ion-item routerLink="/settings">
+        <ion-icon name="settings" style="margin-right: 8px;"></ion-icon>
+        Settings
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-icon name="home" style="margin-right: 8px;"></ion-icon>
+        My Address
+      </ion-item> -->
+
+      <ion-item>
+        <ion-icon name="log-out" size="medium" style="margin-right: 8px;"></ion-icon>
+        Logout
+      </ion-item>
+    </ion-grid>
+  </div>
+
+</ion-content>

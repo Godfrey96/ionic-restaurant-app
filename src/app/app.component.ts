@@ -36,18 +36,11 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private restaurantService: RestaurantsService,
-    private nav: NavController
+    private statusBar: StatusBar
   ) {
     this.initializeApp();
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-
-    this.name = localStorage.getItem("name");
-    this.phoneNumber = localStorage.getItem("phoneNumber");
-    this.dp = "https://ui-avatars.com/api/?background=ff7f50" + "&color=ffffff&size=128&bold=true&name=" + this.name;
-
   }
 
   ngOnInit(){
@@ -60,9 +53,5 @@ export class AppComponent implements OnInit {
     });
   }
 
-  logout(){
-    this.restaurantService.logoutOwner();
-    this.restaurantService.signAuth();
-    this.nav.navigateRoot('/phone-screen')
-  }
+
 }
