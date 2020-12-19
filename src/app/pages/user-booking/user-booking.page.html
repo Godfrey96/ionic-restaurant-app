@@ -72,8 +72,8 @@
             <p *ngIf="book.status == 'Cancelled'" style="font-size: x-small; font-weight: bold;">Your booking has been {{book.status}}</p> 
             <p *ngIf="book.status == 'Approved'" style="font-size: x-small; font-weight: bold;">Your booking has been {{book.status}}</p> 
             <p></p>
-            <p (click)="statuses(book.ownerId, book.uid, 'Pending')"></p>
-            <ion-button style="text-transform: capitalize;" (click)="statuses(book.ownerId, book.uid, 'Cancelled')" [disabled]="disableButton" color="danger" size="small">
+            <p (click)="statuses(book.restId, book.uid, 'Pending')"></p>
+            <ion-button style="text-transform: capitalize;" (click)="statuses(book.restId, book.uid, 'Cancelled')" [disabled]="disableButton" color="danger" size="small">
               Cancel
             </ion-button> 
           </ion-col>

@@ -57,7 +57,7 @@ export class UserBookingPage implements OnInit {
 
   }
 
-  async statuses(ownerId, userId, status){
+  async statuses(restId, bookId, status){
 
     const alert = await this.alertCtrl.create({
 
@@ -73,7 +73,7 @@ export class UserBookingPage implements OnInit {
         {
           text: 'Yes',
           handler: () => {
-            this.restaurantService.bookingStatus(ownerId, userId, status);
+            this.restaurantService.bookingStatus(restId, bookId, status);
             this.disableButton = true;
           }
         }

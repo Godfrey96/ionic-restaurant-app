@@ -81,7 +81,8 @@
             <h4 style="font-weight: bold;">Booking Details</h4>
           </div>
           <ion-list>
-            <ion-datetime formControlName="date" style="margin-bottom: 10px;" displayFormat="DD-MM-YYYY" pickerFormat="DD-MMMM-YYYY" placeholder="Select Date" [min]="minDate" [max]="maxDate" [(ngModel)]="myDate"></ion-datetime>
+            <ion-datetime formControlName="date" style="margin-bottom: 10px;" displayFormat="DD-MM-YYYY" pickerFormat="DD-MMMM-YYYY" placeholder="Select Date" [min]="minDate" [max]="maxDate"></ion-datetime>
+            <!-- <ion-datetime formControlName="date" style="margin-bottom: 10px;" displayFormat="DD-MM-YYYY" pickerFormat="DD-MMMM-YYYY" placeholder="Select Date" [min]="minDate" [max]="maxDate" [(ngModel)]="myDate"></ion-datetime> -->
             <ion-datetime formControlName="time" style="margin-bottom: 10px;" placeholder="Select time to arrive"  [hourValues]="hourValues" [min]="minTime" [max]="maxTime" displayFormat="hh:mm A" pickerFormat="HH:mm A" (ionFocus)="changeDate($event)"></ion-datetime>
 
               <ion-label>How many quests?</ion-label>

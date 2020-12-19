@@ -170,7 +170,8 @@ export class MakeABookingPage implements OnInit {
                 doc.set({ bookId: doc.id }, { merge: true }).then(() => {
                   console.log('BOOKING ID: ', this.bookId)
                 })
-                this.nav.navigateRoot('/reviews/' + this.id);
+                // this.nav.navigateRoot('/reviews/' + this.id);
+                this.nav.navigateRoot('/user-booking')
                 this.bookingForm.reset();
               }).catch(function (error) {
                 console.log(error)

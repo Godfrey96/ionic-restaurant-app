@@ -27,6 +27,7 @@ export class ViewRestaurantPage implements OnInit {
   restId: any;
   firstName: any;
   lastName: any;
+  selectedColor: boolean = false;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -39,6 +40,7 @@ export class ViewRestaurantPage implements OnInit {
 
   ngOnInit() {
 
+    console.log('COLOR: ', this.selectedColor)
     this.id = this.activatedActivated.snapshot.paramMap.get('id')
     console.log('ID: ', this.id)
 
@@ -81,6 +83,26 @@ export class ViewRestaurantPage implements OnInit {
       console.log('new profile: ', this.profile)
     })
 
+  }
+
+  addToFavorite(restId){
+    if(this.selectedColor){
+      firebase.firestore().collection('favorites').doc(restId).set({
+        restId: this.id
+      }, { merge: true }).then(res => {
+        this.selectedColor = false;
+        console.log('ADDED TO FAVORITES: ', this.restId)
+      });
+    }
+  }
+
+  deleteToFavorite(restId){
+    if(!this.selectedColor){
+      firebase.firestore().collection('favorites').doc(restId).delete().then(res => {
+        console.log('DELETED: ', this.restId)
+        this.selectedColor = true
+      })
+    }
   }
 
 

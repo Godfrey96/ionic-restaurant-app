@@ -14,9 +14,19 @@
           <ion-card-subtitle><b style="color: #000000;">{{restaurants?.resName}}'s restaurant</b></ion-card-subtitle>
         </ion-card-header>
       </ion-card>
+      
     
       <div class="cont">
-       
+       <div class="phne"></div>
+       <div class="num">
+        <!-- <ion-icon style="margin-right: 15px; font-size: 13px;" *ngIf="restaurants.color == 'white'" size="large" name="heart"></ion-icon> -->
+        <ion-icon style="margin-right: 15px; font-size: 13px;"  (click)="addToFavorite(restId)" color="danger" size="large" name="heart"></ion-icon>
+        <ion-icon style="margin-right: 15px; font-size: 13px;"  (click)="deleteToFavorite(restId)" size="large" name="heart"></ion-icon>
+        <!-- <ion-icon style="margin-right: 15px; font-size: 13px;" *ngIf="!selectedColor" (click)="addToFavorite(restId)" color="danger" size="large" name="heart"></ion-icon> -->
+        <!-- <ion-button fill="clear" style="margin-right: 15px; color: #ffffff;" (click)="addToFavorite(restId, 'white')">
+          <ion-icon style="margin-right: 15px; font-size: 13px; color: #ffffff;" size="large" name="heart"></ion-icon>
+        </ion-button> -->
+       </div>
       </div>
     
       <div class="cont" style="margin-bottom: -20px;">
