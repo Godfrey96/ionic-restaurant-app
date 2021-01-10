@@ -19,6 +19,9 @@ export class PhoneScreenPage implements OnInit {
   otpSent: boolean = false; //OTP sent status
   phoneNumber: string; //set value after OTP is sent
 
+  checkUser: any;
+  mobile: any;
+
   userP: any;
   firstName: any;
 
@@ -29,21 +32,7 @@ export class PhoneScreenPage implements OnInit {
   constructor(
     public nav: NavController,
     public popoverController: PopoverController
-  ) {
-    //keep track of currently selected country code
-    // setInterval(() => {
-    //   if (sessionStorage.getItem("code")) {
-    //     this.code = sessionStorage.getItem("code")
-    //   }
-    // }, 100);
-  }
-
-  // ionViewDidLoad() {
-  //   this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-  //     'size': 'invisiable'
-  //   });
-  // }
-
+  ) { }
 
   ngOnInit() {
     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
@@ -71,6 +60,7 @@ export class PhoneScreenPage implements OnInit {
   }
 
   verifyOTP() {
+
     const otp = (<HTMLInputElement>document.getElementById("otp")).value;
     this.spin = true;
 
@@ -84,6 +74,8 @@ export class PhoneScreenPage implements OnInit {
         console.log('user profile: ', this.userP);
         this.firstName = snapshot.get('firstName');
         console.log('hahah FIRST NAME: ', this.firstName);
+        this.mobile = snapshot.get('phoneNumber');
+        console.log('mobile: ', this.mobile);
 
         // Checking if the first name is available before logging in
         if (this.firstName) {
@@ -100,7 +92,7 @@ export class PhoneScreenPage implements OnInit {
       localStorage.setItem("uid", data.user.uid);
       //Save phoneNumber to localStorage
       localStorage.setItem("phoneNumber", data.user.phoneNumber);
-      
+
     }).catch(err => {
       alert(err);
       this.spin = false;

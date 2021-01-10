@@ -63,6 +63,10 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
+  {
+    path: 'view-reviews/:id',
+    loadChildren: () => import('./pages/view-reviews/view-reviews.module').then( m => m.ViewReviewsPageModule)
+  },
   // {
   //   path: 'search',
   //   loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)

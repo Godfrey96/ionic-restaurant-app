@@ -42,6 +42,7 @@ export class MakeABookingPage implements OnInit {
 
   restaurants: any = [];
   bookId: any;
+  resManagerId: any;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -63,7 +64,9 @@ export class MakeABookingPage implements OnInit {
     firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
       this.restaurants = snapshot.data();
       this.resName = snapshot.get('resName');
+      this.resManagerId = snapshot.get('ownerId');
       console.log('Booking-resName: ', this.resName)
+      console.log('Res Manager ID: ', this.resManagerId)
       console.log('new data: ', this.restaurants)
     });
 
@@ -156,6 +159,7 @@ export class MakeABookingPage implements OnInit {
                 userId: this.userId,
                 restId: this.id,
                 resName: this.resName,
+                resManagerId: this.resManagerId,
                 date: this.bookingForm.value.date,
                 time: this.bookingForm.value.time,
                 guests: this.bookingForm.value.guests,

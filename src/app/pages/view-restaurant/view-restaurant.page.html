@@ -19,13 +19,7 @@
       <div class="cont">
        <div class="phne"></div>
        <div class="num">
-        <!-- <ion-icon style="margin-right: 15px; font-size: 13px;" *ngIf="restaurants.color == 'white'" size="large" name="heart"></ion-icon> -->
-        <ion-icon style="margin-right: 15px; font-size: 13px;"  (click)="addToFavorite(restId)" color="danger" size="large" name="heart"></ion-icon>
-        <ion-icon style="margin-right: 15px; font-size: 13px;"  (click)="deleteToFavorite(restId)" size="large" name="heart"></ion-icon>
-        <!-- <ion-icon style="margin-right: 15px; font-size: 13px;" *ngIf="!selectedColor" (click)="addToFavorite(restId)" color="danger" size="large" name="heart"></ion-icon> -->
-        <!-- <ion-button fill="clear" style="margin-right: 15px; color: #ffffff;" (click)="addToFavorite(restId, 'white')">
-          <ion-icon style="margin-right: 15px; font-size: 13px; color: #ffffff;" size="large" name="heart"></ion-icon>
-        </ion-button> -->
+
        </div>
       </div>
     
@@ -46,6 +40,17 @@
           <p style="margin-right: 15px;font-size: 13px;">{{restaurants?.website}}</p>
         </div>
       </div>
+
+      <div class="cont" style="margin-top: -25px;">
+        <div class="web">
+          <!-- <p style="margin-left: 10px; font-size: 13px;">Website</p> -->
+        </div>
+        <div class="url">
+          <p style="margin-right: 15px;font-size: 13px;">
+            ({{ this.reviewSize }} Reviews)
+          </p>
+        </div>
+      </div>
     </div>
   </ion-toolbar>
 
@@ -55,49 +60,8 @@
 
   <div class="content">
 
-    
-
-    <!-- <div class="cont-11">
-      <ion-card>
-        <img style="width: 100%; height: 120px;" src="{{restaurants?.imgUrl}}" />
-        <ion-card-header>
-          <ion-card-subtitle>{{restaurants.resName}}  - {{restaurants?.address}}</ion-card-subtitle>
-        </ion-card-header>
-      </ion-card>
-    
-      <div class="cont">
-       
-      </div>
-    
-      <div class="cont" style="margin-bottom: -20px;">
-        <div class="phne">
-          <p style="margin-left: 10px; font-size: 13px;">Phone</p>
-        </div>
-        <div class="num">
-          <p style="margin-right: 15px; font-size: 13px;">+27{{restaurants?.phone}}</p>
-        </div>
-      </div>
-    
-      <div class="cont" style="margin-top: -25px;">
-        <div class="web">
-          <p style="margin-left: 10px; font-size: 13px;">Website</p>
-        </div>
-        <div class="url">
-          <p style="margin-right: 15px;font-size: 13px;">{{restaurants?.website}}</p>
-        </div>
-      </div>
-    </div> -->
-  
-    <!-- <ion-grid>
-      <ion-row>
-        <ion-col class="line">
-          
-        </ion-col>
-      </ion-row>
-    </ion-grid> -->
-
     <ion-grid>
-      <h3 style="font-weight: bold;">Menu</h3>
+      <h3 style="font-weight: bold;">Menu</h3>      
       <ion-row>
         <ion-col size="12">
           <ion-list *ngFor="let menu of arrayMenus">
@@ -115,21 +79,6 @@
       </ion-row>
     </ion-grid>
   
-    <!-- <ion-grid>
-      <h3 style="font-weight: bold;">Menu</h3>
-      <ion-row>
-        <ion-col size="4" *ngFor="let menu of arrayMenus">
-          <ion-card style="width: 100px; height: 130px; margin-left: -2px;">
-            <img style="width: 100%; height: 50px;" src="{{menu.imgUrl}}">
-            <ion-card-subtitle>
-              <p style="margin-left: 5px;">{{menu.description }}</p>
-            </ion-card-subtitle>
-            <ion-card-subtitle style="font-size: 10px; margin-left: 5px; font-weight: bold;">{{menu.price | currency: 'ZAR '}}</ion-card-subtitle>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid> -->
-  
     <ion-grid>
       <ion-row>
         <ion-col class="line">
@@ -139,7 +88,17 @@
     </ion-grid>
   
     <ion-grid  *ngIf="arrayReviews.length > 0">
-      <h3 style="font-weight: bold;">Reviews</h3>
+      <div class="cont" style="margin-top: -25px;">
+        <div class="web">
+          <h4 style="margin-left: 10px; font-weight: bold;">Reviews</h4>
+        </div>
+        <div class="url">
+          <p style="margin-right: 15px;font-size: 13px; margin-top: 23px; color: blue;" (click)="viewReviews()">
+            View all Reviews
+          </p>
+        </div>
+      </div> 
+      
       <ion-row>
         <ion-col>
   
@@ -156,11 +115,13 @@
             </ion-item>
           </ion-list>
           
-
         </ion-col>
       </ion-row>
+
     </ion-grid>
-    <small class="info-text mat-body-1 center" *ngIf="arrayReviews.length <= 0">No reviews yet! Be the first to leave a review</small>
+    <p style="text-align: center;" class="info-text mat-body-1 center" *ngIf="arrayReviews.length <= 0">
+      No reviews yet! <a (click)="viewReviews()">Click here</a> to be the first to leave a review
+    </p>
   
     <ion-button class="btnsignup" [routerLink]="'/view-restaurant/make-a-booking/'+restaurants?.restId">
       Book a table

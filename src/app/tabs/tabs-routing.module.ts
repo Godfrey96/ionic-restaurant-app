@@ -14,8 +14,8 @@ const routes: Routes = [
         loadChildren: () => import('../pages/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
       },
       {
-        path: 'favorites',
-        loadChildren: () => import('../pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
+        path: 'user-booking',
+        loadChildren: () => import('../pages/user-booking/user-booking.module').then( m => m.UserBookingPageModule)
       },
       {
         path: 'search',
