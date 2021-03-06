@@ -23,12 +23,33 @@
       <form [formGroup]="completeForm" (ngSubmit)="completeSignup()">
 
         <ion-input type="text" style="margin-bottom: 10px;" formControlName="firstName" name="firstName" placeholder="First name"></ion-input>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.firstName.errors?.required" style="color: red;">
+          Firstname is required.
+        </span>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.firstName.errors?.minlength" style="color: red;">
+          Min 20 chars long.
+        </span>
 
         <ion-input type="text" style="margin-bottom: 10px;" formControlName="lastName" name="lastName" placeholder="Last name"></ion-input>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.lastName.errors?.required" style="color: red;">
+          Lastname is required.
+        </span>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.lastName.errors?.minlength" style="color: red;">
+          Min 20 chars long.
+        </span>
 
         <ion-input type="date" style="margin-bottom: 10px;" formControlName="DoB" name="DoB" placeholder="Date of Birth"></ion-input>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.DoB.errors?.required" style="color: red;">
+          Date of Birth is required.
+        </span>
 
         <ion-input type="email" style="margin-bottom: 10px;" formControlName="email" name="email" placeholder="Email"></ion-input>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.email.errors?.required" style="color: red;">
+          Email is required.
+        </span>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.email.errors?.pattern" style="color: red;">
+          Enter valid email.
+        </span>
 
         <!-- <ion-button class="button" expand="block" shape="round" (click)="completeSignup()">
           Complete Signup

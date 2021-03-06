@@ -5,6 +5,7 @@
     <div id="sec-cont">
       <h5 style="background-color: white ;"></h5>
       <ion-slides>
+        <p *ngIf="restaurants.length > 0"></p>
         <ion-slide *ngFor="let rest of restaurants">
           <ion-card>
             <img style="width: 100%; height: 200px;" src="{{rest.imgUrl}}" [routerLink]="'/view-restaurant/'+ rest?.restId" />
@@ -12,9 +13,11 @@
           </ion-card>
         </ion-slide>
       </ion-slides>
+      <p style="text-align: center;" class="info-text mat-body-1" *ngIf="restaurants.length <= 0">There ae no available restaurants</p>
 
       <h5 style="background-color: white; margin-left: 15px;">Best Restaurants</h5>
       <ion-list>
+        <p *ngIf="restaurants.length > 0"></p>
         <ion-item *ngFor="let rest of restaurants" [routerLink]="'/view-restaurant/'+ rest?.restId">
           <img style="width: 30%; height: 90%; border-radius: 10px;" src="{{rest.imgUrl}}" />
           <div id="info">
@@ -23,6 +26,7 @@
             <small style="margin-left: 10px;;">{{rest.address}}</small>
           </div>
         </ion-item>
+        <p style="text-align: center;" class="info-text mat-body-1" *ngIf="restaurants.length <= 0">There ae no available restaurants</p>
       </ion-list>
     </div>
   </div>

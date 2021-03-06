@@ -104,34 +104,38 @@
 
           </ion-list>
 
-          <div class="title">
+          <!-- <div class="title">
             <h4 style="font-weight: bold;">Your Information</h4>
           </div>
 
           <ion-input formControlName="firstName" style="margin-bottom: 10px;" type="text" placeholder="First name"></ion-input>
-          <div *ngFor="let error of errorMessages.firstName">
-            <ng-container *ngIf="firstName.hasError(error.type) && (firstName.dirty || firstName.touched)">
-              <small class="error-message">{{error.message}}</small>
-            </ng-container>
-          </div>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.firstName.errors?.required" style="color: red;">
+            Firstname is required.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.firstName.errors?.minlength" style="color: red;">
+            Min 20 chars long.
+          </span>
           <ion-input formControlName="lastName" style="margin-bottom: 10px;" type="text" placeholder="Last name"></ion-input>
-          <div *ngFor="let error of errorMessages.lastName">
-            <ng-container *ngIf="lastName.hasError(error.type) && (lastName.dirty || lastName.touched)">
-              <small class="error-message">{{error.message}}</small>
-            </ng-container>
-          </div>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.lastName.errors?.required" style="color: red;">
+            Lastname is required.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.lastName.errors?.minlength" style="color: red;">
+            Min 20 chars long.
+          </span>
           <ion-input formControlName="mobile" style="margin-bottom: 10px;" type="text" placeholder="mobile"></ion-input>
-          <div *ngFor="let error of errorMessages.mobile">
-            <ng-container *ngIf="mobile.hasError(error.type) && (mobile.dirty || mobile.touched)">
-              <small class="error-message">{{error.message}}</small>
-            </ng-container>
-          </div>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.mobile.errors?.required" style="color: red;">
+            Phone number is required.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.mobile.errors?.pattern" style="color: red;">
+            Number values allowed.
+          </span>
           <ion-input formControlName="email" style="margin-bottom: 10px;" type="email" placeholder="email"></ion-input>
-          <div *ngFor="let error of errorMessages.email">
-            <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
-              <small class="error-message">{{error.message}}</small>
-            </ng-container>
-          </div>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.email.errors?.required" style="color: red;">
+            Email is required.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorCtr.email.errors?.pattern" style="color: red;">
+            Enter valid email.
+          </span> -->
 
           <ion-button class="btnsignup" [disabled]="!bookingForm.valid" (click)="addBooking()" fill="clear">
             Continue

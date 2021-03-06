@@ -29,69 +29,86 @@ export class UserBookingPage implements OnInit {
   restaurants: any
 
   constructor(
-              private activatedActivated: ActivatedRoute, 
-              private restaurantService: RestaurantsService,
-              private modalCtrl: ModalController,
-              public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController,
-              public nav: NavController,
-    ) { }
+    private activatedActivated: ActivatedRoute,
+    private restaurantService: RestaurantsService,
+    private modalCtrl: ModalController,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public nav: NavController,
+  ) { }
 
   ngOnInit() {
 
     this.restaurantService.signAuth();
-    let user = firebase.auth().currentUser;
-    this.userId = user.uid;
-    console.log('user id Booked: ', user)
 
-    const userBookings = firebase.firestore().collectionGroup('bookings').where('userId', '==', this.userId).orderBy('createdAt', 'desc');
-    userBookings.get().then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        this.booking.push(Object.assign( doc.data(), {uid:doc.id}) )
-        this.user_Id = {uid:doc.id}
-        console.log('user_idd: ', this.user_Id)
-        // console.log('doc-id: ', {uid:doc.id}, '=>', 'doc-data: ', doc.data());
-        // console.log('userBookings: ', this.booking)
-      })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+
+        // let user = firebase.auth().currentUser;
+        // this.userId = user.uid;
+        // console.log('user id Booked: ', user)
+
+        const userBookings = firebase.firestore().collectionGroup('bookings').where('userId', '==', user.uid).orderBy('createdAt', 'desc');
+        userBookings.get().then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            this.booking.push(Object.assign(doc.data(), { uid: doc.id }))
+            this.user_Id = { uid: doc.id }
+            console.log('user_idd: ', this.user_Id)
+            // console.log('doc-id: ', {uid:doc.id}, '=>', 'doc-data: ', doc.data());
+            // console.log('userBookings: ', this.booking)
+          })
+        })
+
+      } else {
+        console.log('not logged in')
+      }
     })
 
   }
 
-  async statuses(restId, bookId, status){
+  async statuses(restId, bookId, status) {
 
-    const alert = await this.alertCtrl.create({
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
 
-      message: `Are you sure you want to cancel your booking?.`,
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: blah => {
-            console.log('Confirm No: ', blah);
-          },
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.restaurantService.bookingStatus(restId, bookId, status);
-            this.disableButton = true;
-          }
-        }
-      ]
+        const alert = await this.alertCtrl.create({
 
-    });
-    return await alert.present();
+          message: `Are you sure you want to cancel your booking?.`,
+          buttons: [
+            {
+              text: 'No',
+              role: 'cancel',
+              handler: blah => {
+                console.log('Confirm No: ', blah);
+              },
+            },
+            {
+              text: 'Yes',
+              handler: () => {
+                this.restaurantService.bookingStatus(restId, bookId, status);
+                this.disableButton = true;
+              }
+            }
+          ]
+
+        });
+        return await alert.present();
+
+      } else {
+        console.log('not logged in')
+      }
+    })
 
   }
 
-  async openModal(book){
+  async openModal(book) {
     const modal = await this.modalCtrl.create({
       component: UserModalComponent,
-      componentProps: { 
-        resName: book.resName, 
-        guests: book.guests, 
-        preference: book.preference, 
-        date: book.date, 
+      componentProps: {
+        resName: book.resName,
+        guests: book.guests,
+        preference: book.preference,
+        date: book.date,
         time: book.time,
         status: book.status
       }
@@ -99,7 +116,7 @@ export class UserBookingPage implements OnInit {
     await modal.present();
   }
 
-  ago(time){
+  ago(time) {
     let difference = moment(time).diff(moment())
     return moment.duration(difference).humanize();
   }

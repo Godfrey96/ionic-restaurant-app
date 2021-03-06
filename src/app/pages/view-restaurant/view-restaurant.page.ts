@@ -29,7 +29,7 @@ export class ViewRestaurantPage implements OnInit {
   firstName: any;
   lastName: any;
 
-  reviewSize: any;
+  reviewSize: number = 0;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -46,7 +46,10 @@ export class ViewRestaurantPage implements OnInit {
     this.id = this.activatedActivated.snapshot.paramMap.get('id')
     console.log('ID: ', this.id)
 
-    // fetching single restaurant
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+
+        // fetching single restaurant
     firebase.firestore().collection('restaurants').doc(this.id).get().then(snapshot => {
       this.restaurants = snapshot.data();
       console.log('view restaurant: ', this.restaurants)
@@ -85,6 +88,11 @@ export class ViewRestaurantPage implements OnInit {
     firebase.firestore().collection('users').doc(user).get().then(snapshot => {
       this.profile = snapshot.data();
       console.log('new profile: ', this.profile)
+    })
+
+      }else{
+        console.log('not logged in')
+      }
     })
 
   }
